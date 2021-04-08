@@ -3,28 +3,30 @@
 .grid-container {
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 1fr;
+    grid-template-rows: 100vh;
     grid-template-areas:
     "main";
 }
 .main {
     display: grid;
     grid-template-columns: 0.5fr 1fr 0.5fr;
-    grid-template-rows: 1fr;
+    grid-template-rows: 100vh;
     grid-template-areas:
     "player1 plateau player2";
     grid-area: main;
 }
-.plateau { grid-area: plateau; }
-.player1 { grid-area: player1; }
-.player2 { grid-area: player2; }
-
-
-
-#grid {
-    margin: 0 0 20px;
-    width: 1000px;
-    height: 100vh;
+.plateau {
+    grid-area: plateau;
+}
+.player1 {
+    grid-area: player1;
+    display: grid;
+    place-items: center;
+}
+.player2 {
+    grid-area: player2;
+    display: grid;
+    place-items: center;
 }
 
 .lignes {
@@ -33,8 +35,8 @@
 }
 
 .case {
-    background-image: url("https://cg4.cgsociety.org/uploads/images/medium/netocg-wood-texture-sheet-1-b3b5757a-gznm.jpg");
-    background-size: cover ;
+    background-color: red;
+    background-size: cover;
     border-radius: 3px;
     box-shadow: 1px 1px 2px rgb(220, 157, 80);
     margin: 1px;
@@ -42,4 +44,12 @@
     justify-content: center;
     align-items: center;
     text-align: center;
+}
+
+.arme {
+    background-color: yellow;
+}
+
+#grid {
+    transform: rotateX(45deg) rotateZ(45deg);
 }

@@ -1,11 +1,11 @@
-class Case {
+class Cell {
     constructor(posX, posY) {
         this.posX = posX;
         this.posY = posY;
 
         this.cellContent = "0";
-        this.weaponOnCell = null;
-        this.playerOnCell = null;
+        this.cellWeapons = null;
+        this.cellPlayer = null;
 
         this.diagonalOfObstacle = false;
         this.securityCell = false;
@@ -13,4 +13,4 @@ class Case {
     }
 }
 
-export { Case }
+export { Cell }
