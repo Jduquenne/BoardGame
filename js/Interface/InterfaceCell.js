@@ -1,0 +1,7 @@
+class InterfaceCell {
+
+
+
+}
+
+export { InterfaceCell }
