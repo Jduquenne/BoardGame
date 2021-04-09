@@ -6,3 +6,4 @@ board.generateBoard()
 
 let interfacePlateau = new InterfaceBoard(board);
 interfacePlateau.displayPlateauHtml();
+
