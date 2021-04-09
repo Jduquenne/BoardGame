@@ -9,7 +9,7 @@
 }
 .main {
     display: grid;
-    grid-template-columns: 0.5fr 1.5fr 0.5fr;
+    grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 100vh;
     grid-template-areas:
     "player1 plateau player2";
@@ -17,6 +17,7 @@
 }
 .plateau {
     grid-area: plateau;
+    margin: auto;
 }
 .player1 {
     grid-area: player1;
@@ -37,7 +38,6 @@
 .case {
     border-radius: 2px;
     box-shadow: 1px 1px 2px rgb(220, 157, 80);
-
     display: flex;
     justify-content: center;
     align-items: center;
@@ -52,27 +52,44 @@
 .obstacle {
     background-image: url("https://media.istockphoto.com/photos/wooden-crate-cargo-box-isolated-on-white-background-picture-id969511574?k=6&m=969511574&s=612x612&w=0&h=UBihx_A66v2z_RcqS0P16Zq82x7B4bvCfz75Zdn3GRU=");
 }
-
 .weapon {
-    background-image: url("https://media.istockphoto.com/photos/wooden-crate-cargo-box-isolated-on-white-background-picture-id969511574?k=6&m=969511574&s=612x612&w=0&h=UBihx_A66v2z_RcqS0P16Zq82x7B4bvCfz75Zdn3GRU=");
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-shadow: inset 0 0 0 1px white;
+    border: 5px solid black;
+    background-image: url("https://freepngimg.com/thumb/sword/1-sword-png-image.png");
+    background-color: gray;
+    background-repeat: no-repeat, no-repeat;
+    background-position: center, center;
+    background-size: cover;
+    transition: 0.5s;
+}
+.weapon:hover {
+    border: 2px solid black;
+    background-color: white;
 }
 
-.arme {
-    background-color: yellow;
-}
+
 
 #grid {
-    transform: rotateX(45deg) rotateZ(45deg);
-    transform-style: preserve-3d;
-    transition: 2s;
-}
-#grid:hover {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    border: 10px solid black;
     transform: rotateX(0deg);
+    transform-style: preserve-3d;
+    transition: 1s;
 }
 
-.cube,
-.cube:after,
-.cube:before {
+#grid.Animate{
+    transition: 1s;
+    transform: rotateX(45deg) rotateZ(45deg);
+}
+
+.obstacle,
+.obstacle:after,
+.obstacle:before {
     content: "";
     float: left;
     height: 70px;
@@ -80,7 +97,7 @@
     width: 70px;
 }
 /* Top */
-.cube {
+.obstacle {
     background-image: url("https://media.istockphoto.com/photos/wooden-crate-cargo-box-isolated-on-white-background-picture-id969511574?k=6&m=969511574&s=612x612&w=0&h=UBihx_A66v2z_RcqS0P16Zq82x7B4bvCfz75Zdn3GRU=");
     background-size: cover;
     position: relative;
@@ -89,14 +106,14 @@
     -webkit-transform-style: preserve-3d;
 }
 /* Left */
-.cube:after {
+.obstacle:after {
     background-image: url("https://media.istockphoto.com/photos/wooden-crate-cargo-box-isolated-on-white-background-picture-id969511574?k=6&m=969511574&s=612x612&w=0&h=UBihx_A66v2z_RcqS0P16Zq82x7B4bvCfz75Zdn3GRU=");
     background-size: cover;
     -webkit-transform: rotateX(-90deg) translateY(70px);
     -webkit-transform-origin: 100% 100%;
 }
 /* Right */
-.cube:before {
+.obstacle:before {
     background-image: url("https://media.istockphoto.com/photos/wooden-crate-cargo-box-isolated-on-white-background-picture-id969511574?k=6&m=969511574&s=612x612&w=0&h=UBihx_A66v2z_RcqS0P16Zq82x7B4bvCfz75Zdn3GRU=");
     background-size: cover;
     -webkit-transform: rotateY(90deg) translateX(70px);

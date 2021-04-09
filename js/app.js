@@ -7,3 +7,11 @@ board.generateBoard()
 let interfacePlateau = new InterfaceBoard(board);
 interfacePlateau.displayPlateauHtml();
 
+$(document).ready(function(){
+    $('.btnIsoToTop').click(function(e){
+        $("#grid").addClass("Animate")
+    });
+    $('.btnTopToIso').click(function(e){
+        $("#grid").removeClass("Animate")
+    });
+})
