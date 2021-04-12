@@ -15,7 +15,7 @@
     "player1 plateau player2";
     grid-area: main;
 }
-.plateau {
+.board {
     grid-area: plateau;
     margin: auto;
 }
@@ -30,44 +30,88 @@
     place-items: center;
 }
 
-.lignes {
+.lines {
     display: flex;
     justify-content: center;
 }
 
-.case {
-    border-radius: 2px;
+.cell {
     box-shadow: 1px 1px 2px rgb(220, 157, 80);
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
-    height: 70px;
-    width: 70px;
+    height: 20px;
+    width: 20px;
+}
+
+@media (min-width: 576px) {
+    .cell {
+        height: 20px;
+        width: 20px;
+    }
+}
+
+
+@media (min-width: 768px) {
+    .cell {
+        height: 40px;
+        width: 40px;
+    }
+}
+
+
+@media (min-width: 992px) {
+    .cell {
+        height: 50px;
+        width: 50px;
+    }
+}
+
+
+@media (min-width: 1200px) {
+    .cell {
+        height: 70px;
+        width: 70px;
+    }
 }
 .floor {
     background-image: url("https://cdna.artstation.com/p/assets/images/images/029/948/678/large/javier-sirerol-woodfloor.jpg?1599126078");
     background-size: cover;
 }
-.obstacle {
-    background-image: url("https://media.istockphoto.com/photos/wooden-crate-cargo-box-isolated-on-white-background-picture-id969511574?k=6&m=969511574&s=612x612&w=0&h=UBihx_A66v2z_RcqS0P16Zq82x7B4bvCfz75Zdn3GRU=");
-}
+
 .weapon {
     box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
     box-shadow: inset 0 0 0 1px white;
-    border: 5px solid black;
+    border: 1px solid black;
     background-image: url("https://freepngimg.com/thumb/sword/1-sword-png-image.png");
     background-color: gray;
-    background-repeat: no-repeat, no-repeat;
-    background-position: center, center;
     background-size: cover;
-    transition: 0.5s;
+    transform-style: preserve-3d;
+    perspective: 2000px;
 }
 .weapon:hover {
-    border: 2px solid black;
+    border: 3px solid black;
     background-color: white;
+    animation: spin 1s infinite;
+}
+@keyframes spin{
+    0%{transform: rotateZ(0deg)}
+    100%{transform: rotateZ(360deg)}
+}
+
+.player {
+    /*box-sizing: border-box;*/
+    /*box-shadow: inset 0 0 0 1px white;*/
+    /*border: 1px solid black;*/
+    background-image: url("https://opengameart.org/sites/default/files/player_19.png");
+    background-size: cover;
+    transform-style: preserve-3d;
+    perspective: 2000px;
+}
+.isometric .player {
+    /*transition: 1s;*/
+    transform: rotateX(0deg) rotateZ(-45deg) translateZ(20px) translateY(20px);
 }
 
 
@@ -76,13 +120,13 @@
     box-sizing: border-box;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
-    border: 10px solid black;
+    border: 15px solid black;
     transform: rotateX(0deg);
     transform-style: preserve-3d;
     transition: 1s;
 }
 
-#grid.Animate{
+#grid.isometric{
     transition: 1s;
     transform: rotateX(45deg) rotateZ(45deg);
 }
@@ -92,30 +136,105 @@
 .obstacle:before {
     content: "";
     float: left;
-    height: 70px;
+    height: 20px;
     position: absolute;
-    width: 70px;
+    width: 20px;
 }
-/* Top */
+/* Top face */
 .obstacle {
-    background-image: url("https://media.istockphoto.com/photos/wooden-crate-cargo-box-isolated-on-white-background-picture-id969511574?k=6&m=969511574&s=612x612&w=0&h=UBihx_A66v2z_RcqS0P16Zq82x7B4bvCfz75Zdn3GRU=");
+    background-image: url("https://i.pinimg.com/originals/e1/1b/a3/e11ba3abfe7c0f81b6f63cca050ba20a.png");
     background-size: cover;
     position: relative;
     border-radius: 2px;
-    -webkit-transform: translateZ(70px);
+    -webkit-transform: translateZ(20px);
     -webkit-transform-style: preserve-3d;
 }
-/* Left */
+/* Left face */
 .obstacle:after {
-    background-image: url("https://media.istockphoto.com/photos/wooden-crate-cargo-box-isolated-on-white-background-picture-id969511574?k=6&m=969511574&s=612x612&w=0&h=UBihx_A66v2z_RcqS0P16Zq82x7B4bvCfz75Zdn3GRU=");
+    background-image: url("https://i.pinimg.com/originals/e1/1b/a3/e11ba3abfe7c0f81b6f63cca050ba20a.png");
     background-size: cover;
-    -webkit-transform: rotateX(-90deg) translateY(70px);
+    -webkit-transform: rotateX(-90deg) translateY(20px);
     -webkit-transform-origin: 100% 100%;
 }
-/* Right */
+/* Right face */
 .obstacle:before {
-    background-image: url("https://media.istockphoto.com/photos/wooden-crate-cargo-box-isolated-on-white-background-picture-id969511574?k=6&m=969511574&s=612x612&w=0&h=UBihx_A66v2z_RcqS0P16Zq82x7B4bvCfz75Zdn3GRU=");
+    background-image: url("https://i.pinimg.com/originals/e1/1b/a3/e11ba3abfe7c0f81b6f63cca050ba20a.png");
     background-size: cover;
-    -webkit-transform: rotateY(90deg) translateX(70px);
+    -webkit-transform: rotateY(90deg) translateX(20px);
     -webkit-transform-origin: 100% 0;
+}
+
+@media (min-width: 576px) {
+    .obstacle {
+        -webkit-transform: translateZ(20px);
+    }
+    .obstacle,
+    .obstacle:after,
+    .obstacle:before {
+        height: 20px;
+        width: 20px;
+    }
+    .obstacle:before {
+        -webkit-transform: rotateY(90deg) translateX(20px);
+    }
+    .obstacle:after {
+        -webkit-transform: rotateX(-90deg) translateY(20px);
+    }
+}
+
+
+@media (min-width: 768px) {
+    .obstacle {
+        -webkit-transform: translateZ(40px);
+    }
+    .obstacle,
+    .obstacle:after,
+    .obstacle:before {
+        height: 40px;
+        width: 40px;
+    }
+    .obstacle:before {
+        -webkit-transform: rotateY(90deg) translateX(40px);
+    }
+    .obstacle:after {
+        -webkit-transform: rotateX(-90deg) translateY(40px);
+    }
+}
+
+
+@media (min-width: 992px) {
+    .obstacle {
+        -webkit-transform: translateZ(50px);
+    }
+    .obstacle,
+    .obstacle:after,
+    .obstacle:before {
+        height: 50px;
+        width: 50px;
+    }
+    .obstacle:before {
+        -webkit-transform: rotateY(90deg) translateX(50px);
+    }
+    .obstacle:after {
+        -webkit-transform: rotateX(-90deg) translateY(50px);
+    }
+}
+
+
+@media (min-width: 1200px) {
+    .obstacle {
+        -webkit-transform: translateZ(70px);
+    }
+    .obstacle,
+    .obstacle:after,
+    .obstacle:before {
+        height: 70px;
+        width: 70px;
+    }
+    .obstacle:before {
+        -webkit-transform: rotateY(90deg) translateX(70px);
+    }
+    .obstacle:after {
+        -webkit-transform: rotateX(-90deg) translateY(70px);
+    }
 }

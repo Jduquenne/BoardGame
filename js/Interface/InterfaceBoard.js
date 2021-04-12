@@ -15,11 +15,11 @@ class InterfaceBoard {
 
         for (let i = 0; i < this.board.nbOfCellY; i++) {
 
-            gridLine = $(`<div class='lignes' id='ligne${i}'></div>`);
+            gridLine = $(`<div class='lines' id='line${i}'></div>`);
             grid.append(gridLine);
 
             for (let j = 0; j < this.board.nbOfCellX; j++) {
-                gridCell = $(`<div class='case floor' id='${key}'></div>`);
+                gridCell = $(`<div class='cell floor' id='cell${key}'></div>`);
 
                 if (this.board.boardArray[key].cellContent === "Obstacle") {
                     gridCell.addClass("obstacle");
@@ -33,20 +33,12 @@ class InterfaceBoard {
 
                 if (this.board.boardArray[key].cellPlayer) {
                     // gridCell.addClass(this.board.boardArray[key].cellPlayer.toString());
-                    gridCell.css("background-color", "black");
+                    gridCell.addClass("player");
                 }
-
-                key++;
                 gridLine.append(gridCell);
+                key++;
             }
         }
-    }
-
-    isometricToTopView () {
-        $(".btnIsoToTop").click(function () {
-            $("#grid")
-                .animate({transform: 'rotateX(0deg)'},2000);
-        })
     }
 }
 

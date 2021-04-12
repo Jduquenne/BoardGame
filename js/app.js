@@ -2,16 +2,16 @@ import { Board } from "./Entite/Board.js";
 import { InterfaceBoard } from "./Interface/InterfaceBoard.js";
 
 let board = new Board(10,10,10,4, 2)
-board.generateBoard()
+board.init()
 
 let interfacePlateau = new InterfaceBoard(board);
 interfacePlateau.displayPlateauHtml();
 
 $(document).ready(function(){
     $('.btnIsoToTop').click(function(e){
-        $("#grid").addClass("Animate")
+        $("#grid").addClass("isometric")
     });
     $('.btnTopToIso').click(function(e){
-        $("#grid").removeClass("Animate")
+        $("#grid").removeClass("isometric")
     });
 })

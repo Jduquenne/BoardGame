@@ -7,8 +7,6 @@ class Cell {
         this.cellWeapons = null;
         this.cellPlayer = null;
 
-        this.diagonalOfObstacle = false;
-        this.securityCell = false;
         this.cellToGo = false;
     }
 }

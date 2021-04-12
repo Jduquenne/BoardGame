@@ -12,7 +12,6 @@ class Player {
     toString() {
         return this.id;
     }
-
 }
 
 export { Player };

@@ -16,18 +16,21 @@ class Board {
         this.boardArray = [];
 
     }
+    init () {
+        this.generateBoard();
+        this.addRandomObstacles();
+        this.addWeapons();
+        this.addPlayers();
+    }
     generateBoard() {
         for (let i = 0; i < this.totalNbOfCells; i++) {
             let newCell = new Cell(i % this.nbOfCellX, Math.trunc(i / this.nbOfCellX));
             this.boardArray.push(newCell);
         }
-        this.addRandomObstacles();
-        this.addWeapons();
-        this.addPlayers();
     }
 
     // Donne la position d'une case du plateau
-    trouverCase(x, y) {
+    foundCell(x, y) {
         return this.boardArray.find((Cell) => Cell.posX === x && Cell.posY === y);
     }
 
@@ -36,18 +39,18 @@ class Board {
         return this.boardArray.filter((Cell) => Cell.cellContent === "0");
     }
 
-    returnCasesObstacles() {
-        return this.boardArray.filter((Cell) => Cell.cellContent === "0" && Cell.diagonalOfObstacle === false);
+    returnObstaclesCells() {
+        return this.boardArray.filter((Cell) => Cell.cellContent === "0");
     }
 
-    returnCasesPlayer() {
-        return this.boardArray.filter((Cell) => Cell.cellContent === "0" && Cell.securityCell === false);
+    returnPlayerCells() {
+        return this.boardArray.filter((Cell) => Cell.cellContent === "0");
     }
 
     // Ajouter obsctables sur cases vide aléatoires
     addRandomObstacles() {
         for (let i = 0; i < this.nbObstacles; i++) {
-            let emptyCellsForObstacles = this.returnCasesObstacles();
+            let emptyCellsForObstacles = this.returnObstaclesCells();
             let index = Math.floor(Math.random() * emptyCellsForObstacles.length);
             emptyCellsForObstacles[index].cellContent = "Obstacle";
         }
@@ -66,13 +69,17 @@ class Board {
     // Ajouter joueurs sur case vide aléatoires
     addPlayers() {
         for (let i = 0; i < this.nbPlayers; i++){
-            let emptyCells = this.returnCasesPlayer();
+            let emptyCells = this.returnPlayerCells();
             let index = Math.floor(Math.random() * emptyCells.length);
             let playerCase = emptyCells[index];
 
             playerCase.cellContent = "Player";
             playerCase.cellPlayer = new Player('player'+[i], 'player'+[i]+'nom');
         }
+    }
+
+    getCellsToGo() {
+
     }
 }
 
