@@ -1,14 +1,11 @@
 class Weapon {
-    constructor(id, name, damage, img) {
-        this.id = id;
+    constructor(name,image,line,column,model,damage){
         this.name = name;
+        this.image = image;
+        this.line = line;
+        this.column = column;
+        this.model = model;
         this.damage = damage;
-        this.img = img;
-    }
-
-    toString() {
-        return this.id;
     }
 }
-
 export { Weapon }

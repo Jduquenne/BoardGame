@@ -7,21 +7,21 @@ class InterfaceBoard {
     }
 
     // Affiche le plateau en élément HTML
-    displayPlateauHtml() {
+    displayBoardHtml() {
         const grid = $("#grid");
         let gridLine = "";
         let gridCell = "";
         let key = 0;
 
-        for (let i = 0; i < this.board.nbOfCellY; i++) {
+        for (let i = 0; i < this.board.maxColumn; i++) {
 
             gridLine = $(`<div class='lines' id='line${i}'></div>`);
             grid.append(gridLine);
 
-            for (let j = 0; j < this.board.nbOfCellX; j++) {
+            for (let j = 0; j < this.board.maxLine; j++) {
                 gridCell = $(`<div class='cell floor' id='cell${key}'></div>`);
 
-                if (this.board.boardArray[key].cellContent === "Obstacle") {
+                if (this.board.boardArray[key].cellContent === 1) {
                     gridCell.addClass("obstacle");
                 }
 

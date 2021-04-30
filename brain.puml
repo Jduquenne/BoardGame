@@ -1,0 +1,86 @@
+@startuml
+class Board {
+    int maxLine;
+    int maxColumn;
+    int size;
+    this.world = "../boardgame/assets/"+world+"/";
+    Array boardArray = [];
+    '    [{x: 0,y: 0, player: Player, isCurrent: true},{index: 235,player: Player, isCurrent: false}]
+    Array players = [];
+    this.currentPlayer = 0;
+    this.readyWeapons = false;
+    this.readyCharacters = false;
+    int round: 0;
+
+    Board initGame(int nbPlayer, int nbObstabcle, int nbWeapon)
+    Board initPlayers(int nbPlayer)
+    Board initObstabcle(int nbObstabcle)
+    Board initWeapon(int nbWeapon)
+    boolean isReady()
+    Array initMap()
+    Array randomCoordinates()
+    int updateCurrent()
+    displayMap()
+
+
+}
+
+class Cell {
+    int line;
+    int column;
+    int cellContent;
+    string image;
+    string container;
+
+
+    string setBackground()
+    string setCaseSize()
+
+    string displayCase()
+    string displayMove()
+    string displayContainer()
+
+    Array setContainer(element)
+    string removeContainer(element=null)
+    boolean isObstacle()
+    boolean isEmpty()
+    boolean setAvailable()
+
+    boolean hasWeapon()
+    boolean hasPlayer()
+
+}
+
+class Player {
+   string name
+   integer hp
+   string picture
+   Weapon weapon
+
+   deplace()
+   stopMove()
+   attack()
+   defend()
+   updateHealth()
+
+   getWeapon()
+
+   setContainer()
+   removeContainer()
+   updateCoordinatesContainer()
+}
+
+class Item {
+    string name;
+    string image;
+    int line;
+    int column;
+    string model;
+    int damage;
+}
+
+@enduml
+
+
+
+
