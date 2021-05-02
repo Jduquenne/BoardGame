@@ -57,17 +57,13 @@ class Player {
    string picture
    Weapon weapon
 
-   deplace()
-   stopMove()
+   isAlive()
+   move()
    attack()
    defend()
    updateHealth()
 
-   getWeapon()
-
-   setContainer()
-   removeContainer()
-   updateCoordinatesContainer()
+   getWeapon(newWeapon)
 }
 
 class Item {

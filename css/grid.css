@@ -43,7 +43,8 @@
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     border: 5px solid black;
-    transform: rotateX(0deg);
+    transform: rotateX(45deg) rotateZ(45deg);
+    /*transform: rotateX(0deg);*/
     transform-style: preserve-3d;
     transition: 1s;
 }
@@ -104,12 +105,15 @@
     box-sizing: border-box;
     box-shadow: inset 0 0 0 1px white;
     border: 1px solid black;
-    background-image: url("https://freepngimg.com/thumb/sword/1-sword-png-image.png");
     background-color: gray;
     background-size: cover;
     transform-style: preserve-3d;
     perspective: 2000px;
 }
+.weapon.dagger1 {
+    background-image: url("../assets/dungeon/weapons/dagger3.png");
+}
+
 .weapon:hover {
     border: 3px solid black;
     background-color: white;
@@ -118,6 +122,13 @@
 @keyframes spin{
     0%{transform: rotateZ(0deg)}
     100%{transform: rotateZ(360deg)}
+}
+
+.player1 {
+    background-image: url("../assets/dungeon/characters/ninja.png");
+}
+.player2 {
+    background-image: url("../assets/dungeon/characters/orc1.png");
 }
 
 .player {
