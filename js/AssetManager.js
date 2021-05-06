@@ -1,23 +1,22 @@
+
 export let CELL_DECOR_FLOOR = 0;
 export let CELL_DECOR_OBSTACLE = 1;
 export let CELL_DECOR_WEAPON = 2;
 export let CELL_DECOR_PLAYER = 3;
 
-
-
 export class AssetManager
 {
-    static  getDecorImg(what)
-    {
+    static  getDecorImg(what, theme, name) {
         switch (what) {
             case CELL_DECOR_FLOOR:
-                return "./assets/dungeon/empty.jpg";
+                return `./assets/${theme}/empty.jpg`;
             case CELL_DECOR_OBSTACLE:
-                return "./assets/dungeon/obstacle.png";
+                return `./assets/${theme}/obstacle.png`;
             case CELL_DECOR_WEAPON:
-                return "./assets/dungeon/weapons/dagger3.png";
+                return `./assets/${theme}/weapons/${name}.png`;
             case CELL_DECOR_PLAYER:
-                return "./assets/dungeon/characters/samurai.png";
+                return `./assets/${theme}/characters/${name}.png`;
         }
+
     }
 }

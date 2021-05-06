@@ -9,37 +9,34 @@ import {
 
 class Cell {
 
-    constructor(id, decor) {
+    constructor(id, decor, theme) {
         this.id = id;
         this.decor = decor;
         this.container = this.initContainer();
-        this.setDecor("", this.decor, this.decor);
+
+        this.setDecor(this.decor, theme);
     }
 
     initContainer(){
         return $(`<div class="cell" id="${this.id}"></div>`);
     }
 
-    setDecor(classAdd, decor, floor){
-        this.container.css('background-image', "url('"+ AssetManager.getDecorImg(decor) +"'), url('"+ AssetManager.getDecorImg(floor) +"')");
-        this.container.addClass(classAdd);
-        // A voir avec Sébastien ( récuperer before, after avec la meme img (getDecorImg)
+    setDecor(decor, theme, floor, classAdd, name) {
+        if (decor === CELL_DECOR_FLOOR) {
+            this.container.css('background-image', "url('"+ AssetManager.getDecorImg(decor, theme) +"')");
+        } else {
+            this.container.css('background-image', "url('"+ AssetManager.getDecorImg(decor, theme, name) +"'), url('"+ AssetManager.getDecorImg(floor, theme) +"')");
+            this.container.addClass(classAdd);
+            // TODO A voir avec Sébastien ( récuperer before, after avec la meme img (getDecorImg)
+        }
     }
+    //
+    // addInStack(what)
+    //
+    // deleteFromStack(what)
 
     isEmpty(){
         return this.decor === CELL_DECOR_FLOOR;
-    }
-
-    isObstacle(){
-        return this.decor === CELL_DECOR_OBSTACLE;
-    }
-
-    isWeapon(){
-        return this.decor === CELL_DECOR_WEAPON;
-    }
-
-    isPlayer(){
-        return this.decor === CELL_DECOR_PLAYER;
     }
 }
 

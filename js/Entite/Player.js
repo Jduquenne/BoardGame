@@ -1,13 +1,9 @@
 class Player {
-    constructor(name,health,image) {
+    constructor(name,health,weapon,image) {
         this.name = name;
         this.health = health;
+        this.weapon = weapon;
         this.image = image;
-        this.container = null;
-    }
-
-    insertPlayer(index) {
-        $(`#c${index}`).addClass(this.image);
     }
 }
 

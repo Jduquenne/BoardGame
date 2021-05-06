@@ -1,9 +1,9 @@
 class Weapon {
-    constructor(name,image,model,damage){
+    constructor(name,damage,image){
         this.name = name;
-        this.image = image;
-        this.model = model;
         this.damage = damage;
+        this.image = image;
     }
+
 }
 export { Weapon }

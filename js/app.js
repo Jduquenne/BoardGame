@@ -1,4 +1,4 @@
-import { Board } from "./Entite/Board.js";
+import { Board } from "./Engine/Board.js";
 import { InterfaceBoard } from "./Interface/InterfaceBoard.js";
 import { Weapon } from "./Entite/Weapon.js";
 

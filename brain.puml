@@ -2,77 +2,88 @@
 class Board {
     int maxLine;
     int maxColumn;
-    int size;
-    this.world = "../boardgame/assets/"+world+"/";
+    sting world = "../boardgame/assets/"+world+"/";
+
     Array boardArray = [];
     '    [{x: 0,y: 0, player: Player, isCurrent: true},{index: 235,player: Player, isCurrent: false}]
     Array players = [];
-    this.currentPlayer = 0;
-    this.readyWeapons = false;
-    this.readyCharacters = false;
-    int round: 0;
+    Array weapons = [];
 
-    Board initGame(int nbPlayer, int nbObstabcle, int nbWeapon)
-    Board initPlayers(int nbPlayer)
-    Board initObstabcle(int nbObstabcle)
-    Board initWeapon(int nbWeapon)
-    boolean isReady()
-    Array initMap()
-    Array randomCoordinates()
-    int updateCurrent()
-    displayMap()
+    createCells()
+    putObstacles(nbObstacles)
+    putWeapons(nbWeapons)
+    putPlayers(nbPlayers)
 
+    getRandomCoordinates()
 
+    displayBoard()
+
+    initGame()
+
+    randomWeaponsCoordinates()
 }
 
 class Cell {
-    int line;
-    int column;
-    int cellContent;
-    string image;
-    string container;
+    string id;
+    int whatInside;
+    string container = initContainer();
 
+    initContainer()
 
-    string setBackground()
-    string setCaseSize()
+    setFloor()
+    setObstacle()
+    setWeapon()
+    setPlayer()
 
-    string displayCase()
-    string displayMove()
-    string displayContainer()
+    removeFloor()
+    removeObstacle()
+    removeWeapon()
+    removePlayer()
 
-    Array setContainer(element)
-    string removeContainer(element=null)
-    boolean isObstacle()
-    boolean isEmpty()
-    boolean setAvailable()
-
-    boolean hasWeapon()
-    boolean hasPlayer()
+    isFloor()
+    isObstacle()
+    isWeapon()
+    isPlayer()
 
 }
 
 class Player {
    string name
    integer hp
-   string picture
+   string image
    Weapon weapon
-
-   isAlive()
-   move()
-   attack()
-   defend()
-   updateHealth()
-
-   getWeapon(newWeapon)
 }
 
-class Item {
+class Weapon {
     string name;
     string image;
-    int line;
-    int column;
-    string model;
     int damage;
+}
+
+class Game {
+    Board;
+    array players;
+    array weapons;
+    activePlayer = players[0];
+    target = activePlayer === player[0] ? player[1] : player[0];
+
+    playerMove()
+    playerGetWeapon(weapon)
+    playerDropWeapon(weapon)
+
+    checkFightBegin()
+
+    startFight()
+
+    fight()
+    playerAttack()
+    playerDefence()
+
+    changePlayerTurn()
+
+    checkVictory()
+
+    endGame()
 }
 
 @enduml
