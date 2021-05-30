@@ -6,17 +6,21 @@ export let CELL_DECOR_PLAYER = 3;
 
 export class AssetManager
 {
-    static  getDecorImg(what, theme, name) {
+    static  getWhatInsideImg(what) {
         switch (what) {
             case CELL_DECOR_FLOOR:
-                return `./assets/${theme}/empty.jpg`;
+                return `./assets/dungeon/empty.jpg`;
             case CELL_DECOR_OBSTACLE:
-                return `./assets/${theme}/obstacle.png`;
-            case CELL_DECOR_WEAPON:
-                return `./assets/${theme}/weapons/${name}.png`;
-            case CELL_DECOR_PLAYER:
-                return `./assets/${theme}/characters/${name}.png`;
+                return `./assets/dungeon/obstacle.png`;
         }
+    }
 
+    static getWeaponImg(weapon){
+        return `./assets/dungeon/weapons/${weapon.image}`;
+
+    }
+
+    static getPlayerImg(player){
+        return `./assets/dungeon/characters/${player.image}`;
     }
 }

@@ -21,6 +21,7 @@ body {
 }
 .main {
     display: grid;
+    background-image: linear-gradient(120deg, #024059 0%, #3E5159 100%);
     grid-template-columns: 1.5fr 0.5fr;
     grid-template-rows: 1.8fr 0.2fr;
     grid-template-areas:
@@ -45,68 +46,71 @@ body {
 .player1Infos {
     grid-area: player1Infos;
     background-color: #333140;
-    color: white;
     display: grid;
     place-items: center;
 }
 .player2Infos {
     grid-area: player2Infos;
     background-color: #333210;
-    color: white;
     display: grid;
     place-items: center;
 }
+
+.playerImg {
+    background-size: cover;
+    height: 25%;
+    width: 25%;
+}
+.playerWeaponImg {
+    background-size: cover;
+    height: 25%;
+    width: 25%;
+}
+
 .weaponsUI {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-template-rows: 1fr;
-    grid-template-areas:
-    "weapon1Infos weapon2Infos weapon3Infos weapon4Infos";
+    display: table;
+    width: 100%;
+    text-align: center;
     grid-area: weaponsUI;
 }
-.weapon1Infos {
-    grid-area: weapon1Infos;
-    background-color: #333280;
-    color: white;
-    display: grid;
-    place-items: center;
+.weaponsUI ul {
+    display: table-row;
 }
-.weapon2Infos {
-    grid-area: weapon2Infos;
-    background-color: #333230;
-    color: white;
-    display: grid;
-    place-items: center;
+
+.weaponsUI li {
+    background-color: #333333;
+    display: table-cell;
+    border-radius: 10px;
+    width: 25%;
 }
-.weapon3Infos {
-    grid-area: weapon3Infos;
-    background-color: #333260;
-    color: white;
-    display: grid;
-    place-items: center;
-}
-.weapon4Infos {
-    grid-area: weapon4Infos;
-    background-color: #333339;
-    color: white;
-    display: grid;
-    place-items: center;
+
+.player-card {
+    background: white;
+    color: black;
+    width: 90%;
+    height: 90%;
+    display: inline-block;
+    margin: auto;
+    border-radius: 10px;
+    position: relative;
+    text-align: center;
+    box-shadow: -1px 15px 30px -12px black;
+    transition: background 0.8s;
+    z-index: 9999;
 }
 
 #board {
     box-sizing: border-box;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
-    border: 5px solid black;
-    transform: rotateX(50deg) rotateZ(45deg);
-    /*transform: rotateX(0deg);*/
+    border: 5px solid #F2E6C2;
+    transform: rotateX(45deg) rotateZ(45deg);
     transform-style: preserve-3d;
     transition: 1s;
 }
 
 .isometric{
-    transition: 1s;
-    transform: rotateX(45deg) rotateZ(45deg);
+    transform: rotateX(-45deg) rotateZ(-45deg);
 }
 
 .lines {
@@ -176,13 +180,6 @@ body {
     100%{transform: rotateZ(360deg)}
 }
 
-.player1 {
-    background-image: url("../assets/dungeon/characters/ninja.png");
-}
-.player2 {
-    background-image: url("../assets/dungeon/characters/orc1.png");
-}
-
 .player {
     box-sizing: border-box;
     box-shadow: inset 0 0 0 1px blue;
@@ -191,17 +188,26 @@ body {
     background-repeat: no-repeat ;
     background-position: center;
     transform-style: preserve-3d;
-    perspective: 2000px;
+    perspective: 1000px;
+    /*transform: rotateZ(-45deg) rotateX(-45deg) translateZ(45px);*/
 }
 
-.isometric .player {
-    /*transition: 1s;*/
-    transform: rotateX(0deg) rotateZ(-45deg) translateZ(20px) translateY(20px);
+.cellToMove {
+    box-sizing: border-box;
+    box-shadow: inset 0 0 0 1px black;
+    border: 1px solid black;
+}
+
+.cellToMove:hover {
+    box-sizing: border-box;
+    box-shadow: inset 0 0 0 1px white;
+    border: 1px solid black;
+    cursor: pointer;
 }
 
 @media (min-width: 576px) {
     #board {
-        border: 5px solid black;
+        border: 5px solid #F2E6C2;
     }
     .cell {
         height: 30px;
@@ -227,7 +233,33 @@ body {
 
 @media (min-width: 768px) {
     #board {
-        border: 7px solid black;
+        border: 7px solid #F2E6C2;
+    }
+    .cell {
+        height: 35px;
+        width: 35px;
+    }
+    .obstacle {
+        -webkit-transform: translateZ(35px);
+    }
+    .obstacle,
+    .obstacle:after,
+    .obstacle:before {
+        height: 35px;
+        width: 35px;
+    }
+    .obstacle:before {
+        -webkit-transform: rotateY(90deg) translateX(35px);
+    }
+    .obstacle:after {
+        -webkit-transform: rotateX(-90deg) translateY(35px);
+    }
+}
+
+
+@media (min-width: 992px) {
+    #board {
+        border: 10px solid #F2E6C2;
     }
     .cell {
         height: 40px;
@@ -251,35 +283,9 @@ body {
 }
 
 
-@media (min-width: 992px) {
-    #board {
-        border: 10px solid black;
-    }
-    .cell {
-        height: 50px;
-        width: 50px;
-    }
-    .obstacle {
-        -webkit-transform: translateZ(50px);
-    }
-    .obstacle,
-    .obstacle:after,
-    .obstacle:before {
-        height: 50px;
-        width: 50px;
-    }
-    .obstacle:before {
-        -webkit-transform: rotateY(90deg) translateX(50px);
-    }
-    .obstacle:after {
-        -webkit-transform: rotateX(-90deg) translateY(50px);
-    }
-}
-
-
 @media (min-width: 1200px) {
     #board {
-        border: 13px solid black;
+        border: 13px solid #F2E6C2;
     }
     .cell {
         height: 60px;
@@ -303,46 +309,3 @@ body {
 }
 
 
-
-.cellToMove {
-    background-color: black;
-}
-
-.cellToMove:hover {
-    cursor: pointer;
-}
-
-.player-card {
-    background: white;
-    width: 75%;
-    height: 75%;
-    display: inline-block;
-    margin: auto;
-    border-radius: 19px;
-    position: relative;
-    text-align: center;
-    box-shadow: -1px 15px 30px -12px black;
-    z-index: 9999;
-}
-
-.player-image {
-    position: relative;
-    height: 50px;
-    margin-bottom: 35px;
-    border-top-left-radius: 14px;
-    border-top-right-radius: 14px;
-}
-.player-image img {
-    width: 50%;
-    position: absolute;
-    top: -35px;
-    left: 50%;
-    margin-left: -150px;
-}
-
-.player-card-name {
-    text-transform: uppercase;
-    font-size: 12px;
-    font-weight: 700;
-    margin-bottom: 3px;
-}

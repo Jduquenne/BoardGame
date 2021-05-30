@@ -1,8 +1,0 @@
-class InterfaceCell {
-
-
-
-
-}
-
-export { InterfaceCell }

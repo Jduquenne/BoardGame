@@ -1,16 +1,10 @@
 import { Board } from "./Engine/Board.js";
-import { InterfaceBoard } from "./Interface/InterfaceBoard.js";
-import { Weapon } from "./Entite/Weapon.js";
+import { AssetManager } from "./AssetManager.js";
 
-
-let board = new Board(10,10, "dungeon" )
+let board = new Board(10,10)
 board.initGame(10, 4, 2)
 
-$(document).ready(function(){
-    $('.btnIsoToTop').click(function(e){
-        $("#board").addClass("isometric")
-    });
-    $('.btnTopToIso').click(function(e){
-        $("#board").removeClass("isometric")
-    });
-})
+
+$( "#randomWeapons" ).click(function() {
+    board.randomWeaponCoordinates()
+});
