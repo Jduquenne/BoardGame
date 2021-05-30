@@ -1,0 +1,93 @@
+@startuml
+class Board {
+    int maxLine;
+    int maxColumn;
+    sting world = "../boardgame/assets/"+world+"/";
+
+    Array boardArray = [];
+    '    [{x: 0,y: 0, player: Player, isCurrent: true},{index: 235,player: Player, isCurrent: false}]
+    Array players = [];
+    Array weapons = [];
+
+    createCells()
+    putObstacles(nbObstacles)
+    putWeapons(nbWeapons)
+    putPlayers(nbPlayers)
+
+    getRandomCoordinates()
+
+    displayBoard()
+
+    initGame()
+
+    randomWeaponsCoordinates()
+}
+
+class Cell {
+    string id;
+    int whatInside;
+    string container = initContainer;
+
+    initContainer()
+
+    setFloor()
+    setObstacle()
+    setWeapon()
+    setPlayer()
+
+    removeFloor()
+    removeObstacle()
+    removeWeapon()
+    removePlayer()
+
+    isFloor()
+    isObstacle()
+    isWeapon()
+    isPlayer()
+
+}
+
+class Player {
+   string name
+   integer hp
+   string image
+   Weapon weapon
+}
+
+class Weapon {
+    string name;
+    string image;
+    int damage;
+}
+
+class Game {
+    Board;
+    array players;
+    array weapons;
+    activePlayer = players[0];
+    target = activePlayer === player[0] ? player[1] : player[0];
+
+    playerMove()
+    playerGetWeapon(weapon)
+    playerDropWeapon(weapon)
+
+    checkFightBegin()
+
+    startFight()
+
+    fight()
+    playerAttack()
+    playerDefence()
+
+    changePlayerTurn()
+
+    checkVictory()
+
+    endGame()
+}
+
+@enduml
+
+
+
+

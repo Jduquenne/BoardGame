@@ -1,3 +1,15 @@
+:root {
+    --primary: #ddd;
+    --dark: #333;
+    --light: #fff;
+    --shadow: 0 1px 5px rgba(104, 104, 104, 0.8);
+    --befAftObstacle : url("https://i.pinimg.com/originals/e1/1b/a3/e11ba3abfe7c0f81b6f63cca050ba20a.png");
+}
+
+body {
+    margin: 0;
+}
+
 /* Grid & Cases */
 
 .grid-container {
@@ -9,25 +21,96 @@
 }
 .main {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 100vh;
+    background-image: linear-gradient(120deg, #024059 0%, #3E5159 100%);
+    grid-template-columns: 1.5fr 0.5fr;
+    grid-template-rows: 1.8fr 0.2fr;
     grid-template-areas:
-    "player1 plateau player2";
+    "boardGrid playerUI"
+    "weaponsUI weaponsUI";
     grid-area: main;
 }
-.board {
-    grid-area: plateau;
+.boardGrid {
+    grid-area: boardGrid;
     margin: auto;
 }
-.player1 {
-    grid-area: player1;
+.playerUI {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas:
+    "player1Infos"
+    "player2Infos";
+    grid-area: playerUI;
+}
+
+.player1Infos {
+    grid-area: player1Infos;
+    background-color: #333140;
     display: grid;
     place-items: center;
 }
-.player2 {
-    grid-area: player2;
+.player2Infos {
+    grid-area: player2Infos;
+    background-color: #333210;
     display: grid;
     place-items: center;
+}
+
+.playerImg {
+    background-size: cover;
+    height: 25%;
+    width: 25%;
+}
+.playerWeaponImg {
+    background-size: cover;
+    height: 25%;
+    width: 25%;
+}
+
+.weaponsUI {
+    display: table;
+    width: 100%;
+    text-align: center;
+    grid-area: weaponsUI;
+}
+.weaponsUI ul {
+    display: table-row;
+}
+
+.weaponsUI li {
+    background-color: #333333;
+    display: table-cell;
+    border-radius: 10px;
+    width: 25%;
+}
+
+.player-card {
+    background: white;
+    color: black;
+    width: 90%;
+    height: 90%;
+    display: inline-block;
+    margin: auto;
+    border-radius: 10px;
+    position: relative;
+    text-align: center;
+    box-shadow: -1px 15px 30px -12px black;
+    transition: background 0.8s;
+    z-index: 9999;
+}
+
+#board {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    border: 5px solid #F2E6C2;
+    transform: rotateX(45deg) rotateZ(45deg);
+    transform-style: preserve-3d;
+    transition: 1s;
+}
+
+.isometric{
+    transform: rotateX(-45deg) rotateZ(-45deg);
 }
 
 .lines {
@@ -36,60 +119,57 @@
 }
 
 .cell {
-    box-shadow: 1px 1px 2px rgb(220, 157, 80);
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
-    height: 20px;
-    width: 20px;
-}
-
-@media (min-width: 576px) {
-    .cell {
-        height: 20px;
-        width: 20px;
-    }
-}
-
-
-@media (min-width: 768px) {
-    .cell {
-        height: 40px;
-        width: 40px;
-    }
-}
-
-
-@media (min-width: 992px) {
-    .cell {
-        height: 50px;
-        width: 50px;
-    }
-}
-
-
-@media (min-width: 1200px) {
-    .cell {
-        height: 70px;
-        width: 70px;
-    }
-}
-.floor {
-    background-image: url("https://cdna.artstation.com/p/assets/images/images/029/948/678/large/javier-sirerol-woodfloor.jpg?1599126078");
     background-size: cover;
+    height: 25px;
+    width: 25px;
+}
+
+.obstacle,
+.obstacle:after,
+.obstacle:before {
+    content: "";
+    float: left;
+    height: 25px;
+    position: absolute;
+    width: 25px;
+}
+/* Top face */
+.obstacle {
+    background-size: cover;
+    position: relative;
+    border-radius: 2px;
+    -webkit-transform: translateZ(25px);
+    -webkit-transform-style: preserve-3d;
+}
+/* Left face */
+.obstacle:after {
+    background-image: inherit;
+    background-size: cover;
+    -webkit-transform: rotateX(-90deg) translateY(25px);
+    -webkit-transform-origin: 100% 100%;
+}
+/* Right face */
+.obstacle:before {
+    background-image: inherit;
+    background-size: cover;
+    -webkit-transform: rotateY(90deg) translateX(25px);
+    -webkit-transform-origin: 100% 0;
 }
 
 .weapon {
     box-sizing: border-box;
     box-shadow: inset 0 0 0 1px white;
     border: 1px solid black;
-    background-image: url("https://freepngimg.com/thumb/sword/1-sword-png-image.png");
     background-color: gray;
     background-size: cover;
     transform-style: preserve-3d;
     perspective: 2000px;
 }
+
 .weapon:hover {
     border: 3px solid black;
     background-color: white;
@@ -101,89 +181,90 @@
 }
 
 .player {
-    /*box-sizing: border-box;*/
-    /*box-shadow: inset 0 0 0 1px white;*/
-    /*border: 1px solid black;*/
-    background-image: url("https://opengameart.org/sites/default/files/player_19.png");
-    background-size: cover;
-    transform-style: preserve-3d;
-    perspective: 2000px;
-}
-.isometric .player {
-    /*transition: 1s;*/
-    transform: rotateX(0deg) rotateZ(-45deg) translateZ(20px) translateY(20px);
-}
-
-
-
-#grid {
     box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    border: 15px solid black;
-    transform: rotateX(0deg);
+    box-shadow: inset 0 0 0 1px blue;
+    border: 1px solid black;
+    background-size: contain;
+    background-repeat: no-repeat ;
+    background-position: center;
     transform-style: preserve-3d;
-    transition: 1s;
+    perspective: 1000px;
+    /*transform: rotateZ(-45deg) rotateX(-45deg) translateZ(45px);*/
 }
 
-#grid.isometric{
-    transition: 1s;
-    transform: rotateX(45deg) rotateZ(45deg);
+.cellToMove {
+    box-sizing: border-box;
+    box-shadow: inset 0 0 0 1px black;
+    border: 1px solid black;
 }
 
-.obstacle,
-.obstacle:after,
-.obstacle:before {
-    content: "";
-    float: left;
-    height: 20px;
-    position: absolute;
-    width: 20px;
-}
-/* Top face */
-.obstacle {
-    background-image: url("https://i.pinimg.com/originals/e1/1b/a3/e11ba3abfe7c0f81b6f63cca050ba20a.png");
-    background-size: cover;
-    position: relative;
-    border-radius: 2px;
-    -webkit-transform: translateZ(20px);
-    -webkit-transform-style: preserve-3d;
-}
-/* Left face */
-.obstacle:after {
-    background-image: url("https://i.pinimg.com/originals/e1/1b/a3/e11ba3abfe7c0f81b6f63cca050ba20a.png");
-    background-size: cover;
-    -webkit-transform: rotateX(-90deg) translateY(20px);
-    -webkit-transform-origin: 100% 100%;
-}
-/* Right face */
-.obstacle:before {
-    background-image: url("https://i.pinimg.com/originals/e1/1b/a3/e11ba3abfe7c0f81b6f63cca050ba20a.png");
-    background-size: cover;
-    -webkit-transform: rotateY(90deg) translateX(20px);
-    -webkit-transform-origin: 100% 0;
+.cellToMove:hover {
+    box-sizing: border-box;
+    box-shadow: inset 0 0 0 1px white;
+    border: 1px solid black;
+    cursor: pointer;
 }
 
 @media (min-width: 576px) {
+    #board {
+        border: 5px solid #F2E6C2;
+    }
+    .cell {
+        height: 30px;
+        width: 30px;
+    }
     .obstacle {
-        -webkit-transform: translateZ(20px);
+        -webkit-transform: translateZ(30px);
     }
     .obstacle,
     .obstacle:after,
     .obstacle:before {
-        height: 20px;
-        width: 20px;
+        height: 30px;
+        width: 30px;
     }
     .obstacle:before {
-        -webkit-transform: rotateY(90deg) translateX(20px);
+        -webkit-transform: rotateY(90deg) translateX(30px);
     }
     .obstacle:after {
-        -webkit-transform: rotateX(-90deg) translateY(20px);
+        -webkit-transform: rotateX(-90deg) translateY(30px);
     }
 }
 
 
 @media (min-width: 768px) {
+    #board {
+        border: 7px solid #F2E6C2;
+    }
+    .cell {
+        height: 35px;
+        width: 35px;
+    }
+    .obstacle {
+        -webkit-transform: translateZ(35px);
+    }
+    .obstacle,
+    .obstacle:after,
+    .obstacle:before {
+        height: 35px;
+        width: 35px;
+    }
+    .obstacle:before {
+        -webkit-transform: rotateY(90deg) translateX(35px);
+    }
+    .obstacle:after {
+        -webkit-transform: rotateX(-90deg) translateY(35px);
+    }
+}
+
+
+@media (min-width: 992px) {
+    #board {
+        border: 10px solid #F2E6C2;
+    }
+    .cell {
+        height: 40px;
+        width: 40px;
+    }
     .obstacle {
         -webkit-transform: translateZ(40px);
     }
@@ -202,39 +283,29 @@
 }
 
 
-@media (min-width: 992px) {
-    .obstacle {
-        -webkit-transform: translateZ(50px);
-    }
-    .obstacle,
-    .obstacle:after,
-    .obstacle:before {
-        height: 50px;
-        width: 50px;
-    }
-    .obstacle:before {
-        -webkit-transform: rotateY(90deg) translateX(50px);
-    }
-    .obstacle:after {
-        -webkit-transform: rotateX(-90deg) translateY(50px);
-    }
-}
-
-
 @media (min-width: 1200px) {
+    #board {
+        border: 13px solid #F2E6C2;
+    }
+    .cell {
+        height: 60px;
+        width: 60px;
+    }
     .obstacle {
-        -webkit-transform: translateZ(70px);
+        -webkit-transform: translateZ(60px);
     }
     .obstacle,
     .obstacle:after,
     .obstacle:before {
-        height: 70px;
-        width: 70px;
+        height: 60px;
+        width: 60px;
     }
     .obstacle:before {
-        -webkit-transform: rotateY(90deg) translateX(70px);
+        -webkit-transform: rotateY(90deg) translateX(60px);
     }
     .obstacle:after {
-        -webkit-transform: rotateX(-90deg) translateY(70px);
+        -webkit-transform: rotateX(-90deg) translateY(60px);
     }
 }
+
+
