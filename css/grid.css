@@ -1,15 +1,19 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital@1&display=swap");
+
 :root {
     --primary: #ddd;
     --dark: #333;
     --light: #fff;
-    --shadow: 0 1px 5px rgba(104, 104, 104, 0.8);
-    --befAftObstacle : url("https://i.pinimg.com/originals/e1/1b/a3/e11ba3abfe7c0f81b6f63cca050ba20a.png");
 }
 
 body {
+    font-family: 'Roboto', sans-serif;
     margin: 0;
 }
 
+.hidden {
+    display: none;
+}
 /* Grid & Cases */
 
 .grid-container {
@@ -23,7 +27,7 @@ body {
     display: grid;
     background-image: linear-gradient(120deg, #024059 0%, #3E5159 100%);
     grid-template-columns: 1.5fr 0.5fr;
-    grid-template-rows: 1.8fr 0.2fr;
+    grid-template-rows: 1.9fr 0.1fr;
     grid-template-areas:
     "boardGrid playerUI"
     "weaponsUI weaponsUI";
@@ -68,11 +72,14 @@ body {
 }
 
 .weaponsUI {
+    color: #dddddd;
     display: table;
     width: 100%;
+    height: 100%;
     text-align: center;
     grid-area: weaponsUI;
 }
+
 .weaponsUI ul {
     display: table-row;
 }
@@ -80,8 +87,11 @@ body {
 .weaponsUI li {
     background-color: #333333;
     display: table-cell;
-    border-radius: 10px;
     width: 25%;
+}
+.weaponsUI h2 {
+    margin: 15px;
+    display: inline;
 }
 
 .player-card {
@@ -306,6 +316,22 @@ body {
     .obstacle:after {
         -webkit-transform: rotateX(-90deg) translateY(60px);
     }
+}
+
+.fightStart {
+    grid-area: boardGrid;
+    position: fixed;
+    z-index: 1;
+    top: 42%;
+    left: 0;
+    height: 75px;
+    width: 75%;
+    align-items: center;
+    justify-content: center;
+    background-color: #dddddd;
+}
+.fightStart h2 {
+    text-align: center;
 }
 
 

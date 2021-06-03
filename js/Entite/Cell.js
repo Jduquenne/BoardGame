@@ -1,14 +1,17 @@
 import {
     CELL_DECOR_FLOOR,
     CELL_DECOR_OBSTACLE,
-    CELL_DECOR_WEAPON,
-    CELL_DECOR_PLAYER,
     AssetManager
 } from "../AssetManager.js";
 
 
 class Cell {
-
+    /**
+     *
+     * @param {string} id
+     * @param  {number} decor
+     * @param  {function} onClick
+     */
     constructor(id, decor, onClick) {
         this.id = id;
         this.decor = decor;
@@ -17,7 +20,7 @@ class Cell {
         this.securityZone = false;
         this.weapon = null;
         this.player = null;
-        this.onClick = onClick
+        this.onClick = onClick;
         this.display();
     }
 
@@ -61,11 +64,18 @@ class Cell {
         this.display()
     }
 
+    /**
+     *
+     * @param {Weapon} weapon
+     */
     setWeapon(weapon) {
         this.weapon = weapon;
         this.display();
     }
 
+    /**
+     * @param {Player} player
+     */
     setPlayer(player) {
         this.player = player;
         this.display();
@@ -91,6 +101,10 @@ class Cell {
 
     isSecurityZone() {
         return this.securityZone === true;
+    }
+
+    isObstacleAndSecurityZone() {
+        return this.securityZone === true && this.decor === CELL_DECOR_OBSTACLE;
     }
 
     hasWeapon() {

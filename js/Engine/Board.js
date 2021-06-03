@@ -48,7 +48,7 @@ class Board {
         for (let i = 0 ; i < this.maxLine ; i++) {
             this.cellsArray[i] = [];
             for (let j = 0 ; j < this.maxColumn ; j++) {
-                this.cellsArray[i][j] = new Cell(i+''+j, CELL_DECOR_FLOOR, this.cellClickHandler);
+                this.cellsArray[i][j] = new Cell(i+''+j, CELL_DECOR_FLOOR, this.cellClickHandler.bind(this));
             }
         }
     }
@@ -65,6 +65,10 @@ class Board {
         });
     }
 
+    /**
+     *
+     * @param {number} nbObstacles
+     */
     // Ajouter obsctables sur cases vide aléatoires
     putObstacles(nbObstacles) {
         for (let k = 0 ; k < nbObstacles ; k++) {
@@ -77,6 +81,10 @@ class Board {
         }
     }
 
+    /**
+     *
+     * @param {number} nbWeapon
+     */
     // Ajouter armes sur cases vide aléatoires
     putWeapons(nbWeapon) {
         let weapons = WeaponsRepository.findAllWeapons();
@@ -100,6 +108,10 @@ class Board {
         }
     }
 
+    /**
+     *
+     * @param {number}nbPlayers
+     */
     // Ajouter joueurs sur case vide aléatoires
     putPlayers(nbPlayers) {
         let players = PlayersRepository.findAllWeapons();
@@ -108,7 +120,7 @@ class Board {
         for (let k = 0 ; k < nbPlayers ; k++) {
             let [x,y] = this.randomCoordinates();
 
-            if (!this.cellsArray[x][y].isEmpty() || this.cellsArray[x][y].hasWeapon() || this.cellsArray[x][y].isSecurityZone()) {
+            if (!this.cellsArray[x][y].isEmpty() || this.cellsArray[x][y].hasWeapon() || this.cellsArray[x][y].isSecurityZone() || this.cellsArray[x][y].isObstacleAndSecurityZone()) {
                 k--
             } else {
                 this.cellsArray[x][y].setPlayer(players[k])
@@ -125,52 +137,42 @@ class Board {
     }
 
     newRound(){
-        // TODO A voir
-        // this.cellsArray.map(cell => cell.removeCellToGo())
         this.changeActivePlayer()
         this.getCellsToGo()
     }
 
     cellClickHandler(cell){
-        console.log(cell);
+        console.log(cell)
+        if(cell.isMovable) {
+            const originCell = this.cellsArray[this.getActivePlayerInfos().position.row][this.getActivePlayerInfos().position.col]
+            originCell.removePlayer();
+
+            cell.setPlayer(this.getActivePlayerInfos().player)
+            this.getActivePlayerInfos().position = this.cellIdToCoord(cell.id);
+
+            if (cell.hasWeapon()) {
+                const playerWeapon = this.getActivePlayerInfos().player.weapon
+                this.getActivePlayerInfos().player.weapon = cell.weapon
+                cell.removeWeapon(cell.weapon)
+                cell.weapon = playerWeapon
+                this.interfaceUi.setPlayerWeapon(this.getActivePlayerInfos())
+            }
+
+            this.getActivePlayerInfos().cellToGo.map(cell => cell.removeCellToGo());
+            this.getActivePlayerInfos().cellToGo = []
+
+
+            if (cell.securityZone === true) {
+                this.interfaceUi.displayFightStart(this.getActivePlayerInfos())
+            } else {
+                this.newRound()
+            }
+        }
     }
 
     selectCellsPlayerMove() {
         this.removeAllSecurityZone(this.getActivePlayerInfos().position)
         this.putAllSecurityZone(this.getWaitingPlayerInfos().position)
-
-        for (let i = 0; i < this.getActivePlayerInfos().cellToGo.length; i++) {
-            let cellChosen = this.getActivePlayerInfos().cellToGo[i];
-
-            $(cellChosen.container).on('click', (event) => {
-                $('.cellToMove').off()
-                const originCell = this.cellsArray[this.getActivePlayerInfos().position.row][this.getActivePlayerInfos().position.col]
-                originCell.removePlayer();
-
-                const newPlayerPosition = this.cellIdToCoord($(event.target).attr('id'));
-                const newPlayerCell = this.cellsArray[newPlayerPosition.row][newPlayerPosition.col]
-
-                newPlayerCell.setPlayer(this.getActivePlayerInfos().player)
-                this.getActivePlayerInfos().position = newPlayerPosition
-
-                if (newPlayerCell.hasWeapon()) {
-                    const playerWeapon = this.getActivePlayerInfos().player.weapon
-                    this.getActivePlayerInfos().player.weapon = newPlayerCell.weapon
-                    newPlayerCell.removeWeapon(newPlayerCell.weapon)
-                    newPlayerCell.weapon = playerWeapon
-                }
-
-                $(".cellToMove").removeClass("cellToMove")
-                this.getActivePlayerInfos().cellToGo = []
-                this.removeAllCellToGo()
-
-                if (newPlayerCell.securityZone === true) {
-                    alert('Le combat commence !')
-                } else {
-                    this.newRound()
-                }
-            })
-        }
     }
 
     getCellsToGo() {
@@ -227,15 +229,6 @@ class Board {
             }
         }
         this.selectCellsPlayerMove()
-    }
-
-    removeAllCellToGo () {
-        const allCellToGo = this.cellsArray.flat()
-        allCellToGo.filter(cell => cell.isMovable === true)
-
-        for (let i = 0; i < allCellToGo.length; i++) {
-            allCellToGo[i].removeCellToGo()
-        }
     }
 
     putAllSecurityZone(cell) {
