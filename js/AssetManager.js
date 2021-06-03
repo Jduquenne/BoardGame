@@ -1,8 +1,5 @@
-
 export let CELL_DECOR_FLOOR = 0;
 export let CELL_DECOR_OBSTACLE = 1;
-export let CELL_DECOR_WEAPON = 2;
-export let CELL_DECOR_PLAYER = 3;
 
 export class AssetManager
 {
