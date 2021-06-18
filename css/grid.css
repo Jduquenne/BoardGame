@@ -1,18 +1,43 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto:ital@1&display=swap");
+/*noinspection CssUnknownTarget*/
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap');
 
 :root {
-    --primary: #ddd;
-    --dark: #333;
-    --light: #fff;
+    --primary: #424242;
+    --secondary: #E73535;
+    --third: #2B9FE2;
 }
 
 body {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Source Code Pro', monospace;
+    /*font-family: 'Roboto', sans-serif;*/
     margin: 0;
 }
 
 .hidden {
     display: none;
+}
+
+.btn {
+    padding: 0.75rem 1.5rem;
+    margin: 10px;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    background-color: #234959;
+    color: white;
+    font-family: inherit;
+    font-size: 1.25em;
+    font-weight: 400;
+    line-height: 1.5rem;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+    transition: all 150ms ease-out;
+}
+
+.btn:focus, .btn:hover {
+    background-color: #234959;
+    box-shadow: 0 0 0 0.1875rem white, 0 0 0 0.375rem #234959;
 }
 /* Grid & Cases */
 
@@ -25,9 +50,9 @@ body {
 }
 .main {
     display: grid;
-    background-image: linear-gradient(120deg, #024059 0%, #3E5159 100%);
+    background-image: linear-gradient(120deg, #344973 0%, #3E5159 100%);
     grid-template-columns: 1.5fr 0.5fr;
-    grid-template-rows: 1.9fr 0.1fr;
+    grid-template-rows: 1fr 9vh;
     grid-template-areas:
     "boardGrid playerUI"
     "weaponsUI weaponsUI";
@@ -38,25 +63,52 @@ body {
     margin: auto;
 }
 .playerUI {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr;
-    grid-template-areas:
-    "player1Infos"
-    "player2Infos";
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    flex-direction: column;
+    height: 91vh;
     grid-area: playerUI;
 }
 
-.player1Infos {
-    grid-area: player1Infos;
-    background-color: #333140;
-    display: grid;
-    place-items: center;
+.playerTitle {
+    background-color: #C1C7D9;
+    height: 50px;
+    width: 200px;
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px;
+    border-style: solid;
+    border-width: 7px;
+    border-image-slice: 5;
+    border-image-width: 3;
+    border-image-repeat: stretch;
+    border-image-source: url(../css/border.svg);
 }
-.player2Infos {
-    grid-area: player2Infos;
-    background-color: #333210;
-    display: grid;
+
+.playerCard {
+    background: #C1C7D9;
+    color: black;
+    width: 95%;
+    height: 40%;
+    margin: auto;
+    border-radius: 15px;
+    border-style: solid;
+    border-width: 7px;
+    border-image-slice: 5;
+    border-image-width: 3;
+    border-image-repeat: stretch;
+    border-image-source: url(../css/border.svg);
+    text-align: center;
+    z-index: 9999;
+}
+
+.playerInfos {
+    grid-area: playerInfos;
+    background-color: #333140;
+    display: flex;
     place-items: center;
 }
 
@@ -67,47 +119,102 @@ body {
 }
 .playerWeaponImg {
     background-size: cover;
-    height: 25%;
-    width: 25%;
+    height: 15%;
+    width: 15%;
+}
+
+.weaponsTitle {
+    position: fixed;
+    bottom: 7vh;
+    left: 0.3vw;
+    background-color: #4F638C;
+    height: 50px;
+    width: 200px;
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px;
+    border-style: solid;
+    border-width: 7px;
+    border-image-slice: 5;
+    border-image-width: 3;
+    border-image-repeat: stretch;
+    border-image-source: url(../css/border.svg);
 }
 
 .weaponsUI {
     color: #dddddd;
-    display: table;
+    display: flex;
     width: 100%;
     height: 100%;
     text-align: center;
     grid-area: weaponsUI;
 }
 
-.weaponsUI ul {
-    display: table-row;
+.weaponUl {
+    display: flex;
+    width: 100vw;
+    height: 100%;
+    padding: 0;
+    margin: 0;
 }
 
 .weaponsUI li {
-    background-color: #333333;
-    display: table-cell;
-    width: 25%;
-}
-.weaponsUI h2 {
-    margin: 15px;
-    display: inline;
+    display: flex;
+    margin: 5px;
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    border-radius: 15px;
+    border-style: solid;
+    border-width: 5px;
+    border-image-slice: 5;
+    border-image-width: 3;
+    border-image-repeat: stretch;
+    border-image-source: url(../css/border.svg);
 }
 
-.player-card {
-    background: white;
-    color: black;
-    width: 90%;
-    height: 90%;
-    display: inline-block;
-    margin: auto;
-    border-radius: 10px;
-    position: relative;
-    text-align: center;
-    box-shadow: -1px 15px 30px -12px black;
-    transition: background 0.8s;
-    z-index: 9999;
+.weaponsUI li:nth-child(even) {
+    background-color: #344059;
 }
+
+.weaponsUI li:nth-child(odd) {
+    background-color: #4F638C;
+}
+
+.weaponImg {
+    height: 75%;
+    background-size: cover;
+}
+
+.battleInfos {
+    position: fixed;
+    justify-content: center;
+    z-index: 1;
+    top: 42%;
+    left: 0;
+    height: 75px;
+    width: 75%;
+    background-color: #dddddd;
+    grid-area: boardGrid;
+}
+
+.battleInfosText {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.battleInfos .attackerImg {
+    height: 200px;
+}
+.battleInfos .bannerDmg {
+    color: red;
+    font-size: 30px;
+}
+
 
 #board {
     box-sizing: border-box;
@@ -318,20 +425,6 @@ body {
     }
 }
 
-.fightStart {
-    grid-area: boardGrid;
-    position: fixed;
-    z-index: 1;
-    top: 42%;
-    left: 0;
-    height: 75px;
-    width: 75%;
-    align-items: center;
-    justify-content: center;
-    background-color: #dddddd;
-}
-.fightStart h2 {
-    text-align: center;
-}
+
 
 

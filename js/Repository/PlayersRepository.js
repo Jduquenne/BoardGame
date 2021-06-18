@@ -1,22 +1,22 @@
 import {Weapon} from "../Entite/Weapon.js";
+import {Player} from "../Entite/Player.js";
 
-const data =[
-    { name:'Björn', health: 100, weapon: new Weapon('Épée d\'entrainement' , 10, "basic_weapon.png") , image : "Björn.png"},
-    { name:'Bolvar', health: 100, weapon: new Weapon('Épée d\'entrainement' , 10, "basic_weapon.png") , image : "Bolvar.png"},
-    { name:'Brutus', health: 100, weapon: new Weapon('Épée d\'entrainement' , 10, "basic_weapon.png") , image : "Brutus.png"},
-    { name:'ElonMusk', health: 100, weapon: new Weapon('Épée d\'entrainement' , 10, "basic_weapon.png") , image : "ElonMusk.png"},
-    { name:'Gunnar', health: 100, weapon: new Weapon('Épée d\'entrainement' , 10, "basic_weapon.png") , image : "Gunnar.png"},
-    { name:'Indiana', health: 100, weapon: new Weapon('Épée d\'entrainement' , 10, "basic_weapon.png") , image : "Indiana.png"},
-    { name:'Jail', health: 100, weapon: new Weapon('Épée d\'entrainement' , 10, "basic_weapon.png") , image : "Jail.png"},
-    { name:'Kerhs', health: 100, weapon: new Weapon('Épée d\'entrainement' , 10, "basic_weapon.png") , image : "Kerhs.png"},
-    { name:'Khadgar', health: 100, weapon: new Weapon('Épée d\'entrainement' , 10, "basic_weapon.png") , image : "Khadgar.png"},
-    { name:'Lancelot', health: 100, weapon: new Weapon('Épée d\'entrainement' , 10, "basic_weapon.png") , image : "Lancelot.png"},
-    { name:'Prirodny', health: 100, weapon: new Weapon('Épée d\'entrainement' , 10, "basic_weapon.png") , image : "Prirodny.png"},
-    { name:'Thork', health: 100, weapon: new Weapon('Épée d\'entrainement' , 10, "basic_weapon.png") , image : "Thork.png"},
-    { name:'Vanessa VanCleef', health: 100, weapon: new Weapon('Épée d\'entrainement' , 10, "basic_weapon.png") , image : "Van_cleef.png"},
-    { name:'Xena', health: 100, weapon: new Weapon('Épée d\'entrainement' , 10, "basic_weapon.png") , image : "Xena.png"},
-    { name:'Yggdrassil', health: 100, weapon: new Weapon('Épée d\'entrainement' , 10, "basic_weapon.png") , image : "Yggdrassil.png"},
-
+const data = [
+    new Player({ name:'Björn', health: 100, image : "Björn.png"}),
+    new Player({ name:'Bolvar', health: 100, image : "Bolvar.png"}),
+    new Player({ name:'Brutus', health: 100, image : "Brutus.png"}),
+    new Player({ name:'ElonMusk', health: 100, image : "ElonMusk.png"}),
+    new Player({ name:'Gunnar', health: 100, image : "Gunnar.png"}),
+    new Player({ name:'Indiana', health: 100, image : "Indiana.png"}),
+    new Player({ name:'Jail', health: 100, image : "Jail.png"}),
+    new Player({ name:'Kerhs', health: 100, image : "Kerhs.png"}),
+    new Player({ name:'Khadgar', health: 100, image : "Khadgar.png"}),
+    new Player({ name:'Lancelot', health: 100, image : "Lancelot.png"}),
+    new Player({ name:'Prirodny', health: 100, image : "Prirodny.png"}),
+    new Player({ name:'Thork', health: 100, image : "Thork.png"}),
+    new Player({ name:'Vanessa VanCleef', health: 100  , image : "Van_cleef.png"}),
+    new Player({ name:'Xena', health: 100, image : "Xena.png"}),
+    new Player({ name:'Yggdrassil', health: 100, image : "Yggdrassil.png"}),
 ]
 class PlayersRepository {
 
@@ -24,7 +24,7 @@ class PlayersRepository {
         return data.filter(player => player.name === name)
     }
 
-    static findAllWeapons(){
+    static findAllPlayers(){
         return data;
     }
 }
