@@ -14,7 +14,6 @@ export class AssetManager
 
     static getWeaponImg(weapon){
         return `./assets/dungeon/weapons/${weapon.image}`;
-
     }
 
     static getPlayerImg(player){

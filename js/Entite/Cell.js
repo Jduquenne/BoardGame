@@ -66,7 +66,7 @@ class Cell {
 
     /**
      *
-     * @param {Weapon} weapon
+     * @param {{damage: number, image: string, name: string}} weapon
      */
     setWeapon(weapon) {
         this.weapon = weapon;
@@ -74,7 +74,7 @@ class Cell {
     }
 
     /**
-     * @param {Player} player
+     * @param {{weapon: Weapon, image: string, name: string, health: number}} player
      */
     setPlayer(player) {
         this.player = player;
