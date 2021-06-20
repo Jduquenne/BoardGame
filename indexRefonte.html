@@ -1,37 +1,45 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+    <title>BoardGame - Projet 6 développeur Frontend</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>RefonteBoardGame</title>
-    <link rel="stylesheet" href="css/refonteBoardGame.css" />
+    <link rel="stylesheet" href="css/styleRefonte.css" />
+    <!-- JQuery -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type="module" src="js/app.js"></script>
+    <!-- Fin scripts -->
 </head>
 <body>
-<div id="stars"></div>
-<div class="grid-container">
-    <div class="main">
-        <div class="playerOne">
-            <div class="playerOneContainer">
-                <div class="playerOneBgImg"><img class="playerOneImg" src="assets/dungeon/characters/Björn.png" alt="playerOne"></div>
-            </div>
-        </div>
-        <div class="playerTwo">
-            <div class="playerTwoContainer">
-                <div class="playerTwoBgImg"><img class="playerTwoImg" src="assets/dungeon/characters/Bolvar.png" alt="playerOne"></div>
-
-            </div>
-        </div>
+  <div class="app">
+    <div class="mainMenu"></div>
+        <!-- Menu principal -->
+    <div class="game">
+        <!-- Board with interface -->
         <div id="board"></div>
-        <div class="weapons"></div>
+        <div id="menu">
+            <h2 class="playersTitle whiteFont">Joueurs</h2>
+            <div class="playerInterface"></div>
+            <div class="groupBtnRow menuBtn">
+                <button class="btn" id="openRules">Régles</button>
+                <button class="btn" id="backToMenu">Menu</button>
+            </div>
+        </div>
+        <div class="modalRules hidden" id="modal">
+            <div class="modalContent borderPixel">
+                <h2 class="rulesTitle">Régles</h2>
+                <span class="close">X</span>
+                <p class="rule">- Un joueur peut se déplacer de 1 à 3 cases chaque tour.</p>
+                <p class="rule">- Un joueur peut ramasser une arme en marchant dessus.</p>
+                <p class="rule">- Un duel commence lorsque 2 joueurs sont côte à côte.</p>
+                <p class="rule">- Dégats des armes sur le terrain :</p>
+                <div id="weaponList">
+                </div>
+            </div>
+        </div>
+        <div class="battleModal hidden" id="battleInfos">
+
+        </div>
     </div>
-</div>
-
-<!-- Scripts -->
-
-<!-- JQuery -->
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script type="module" src="js/app.js"></script>
-<!-- Fin scripts -->
-
 </body>
 </html>

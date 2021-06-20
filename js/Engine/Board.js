@@ -22,15 +22,14 @@ class Board {
     }
 
     // Initialise une partie sur le plateau généré
-    initGame(nbObstacles,nbWeapons) {
+    initGame() {
         this.generateBoard()
-        this.putObstacles(nbObstacles);
-        this.putWeapons(nbWeapons);
+        this.putObstacles(this.getNbObstacles());
+        this.putWeapons(this.getNbWeapons());
         this.putPlayers(2);
 
-        this.initInterface()
-
         this.getCellsToGo()
+        this.initInterface()
     }
 
     // Initialise l'interface du jeux (players et armes sur le terrain)
@@ -56,8 +55,8 @@ class Board {
 
     // Affiche le plateau
     displayBoard(){
-        let map = this;
-        let boardElt = $('#board');
+        const map = this;
+        const boardElt = $('#board');
         $.each(map.cellsArray,function(x,line) {
             let lineElt = $(`<div class='lines' id='line${x}'></div>`);
             lineElt.appendTo(boardElt);
@@ -65,6 +64,22 @@ class Board {
                 lineElt.append( map.cellsArray[x][y].container );
             });
         });
+
+    }
+
+    getNbObstacles() {
+        const nbCells = this.maxLine * this.maxColumn
+        return Math.round(nbCells / 10)
+    }
+
+    getNbWeapons() {
+        const nbCells = this.maxLine * this.maxColumn
+        const nbWeapons = Math.ceil((nbCells / 20))
+        if (nbWeapons >= 6) {
+            return 6
+        } else {
+            return Math.ceil((nbCells / 20))
+        }
     }
 
     /**
