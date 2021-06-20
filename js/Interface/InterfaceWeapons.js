@@ -2,35 +2,48 @@ class InterfaceWeapons {
 
     constructor(weaponsInfos) {
         this.weaponsInfos = weaponsInfos;
-        this.card = this.initCard()
 
         this.controlsElt = {
-            weaponsUi: $('#weaponsList')
+            weaponsUi: $('#weaponList'),
+            modalRules: $('#modal'),
+            btnRules: $('#openRules'),
+            spanClose: $('.close')
         }
     }
 
-    initCard() {
-        return $(`<li class="weaponLi"></li>`);
-    }
-
-    display() {
-        const weaponUl = $("<ul class='weaponUl'></ul>")
-        const weaponsTitle = $("<h1 class='weaponsTitle'>Weapons</h1>")
-        this.controlsElt.weaponsUi.append(weaponsTitle);
+    displayWeapons() {
+        this.controlsElt.weaponsUi.empty()
         for (let i = 0; i < this.weaponsInfos.length; i++) {
-            this.card.data(this.weaponsInfos[i].weapon.name, this.weaponsInfos[i])
-
-            const weaponLi = $("<li class='weaponLi'></li>")
-
-            const weaponImg = $(`<img class='weaponImg' src="./assets/dungeon/weapons/${this.card.data(this.weaponsInfos[i].weapon.name).weapon.image}\" alt="playerImg"/>`)
-
-            const weaponName = $(`<h2 class='weaponName'>${this.card.data(this.weaponsInfos[i].weapon.name).weapon.name}</h2>`)
-            const weaponDamage = $(`<span class='weaponDamage'>${this.card.data(this.weaponsInfos[i].weapon.name).weapon.damage}</span>`)
-
-            weaponLi.append(weaponImg,weaponName,weaponDamage)
-            weaponUl.append(weaponLi)
-            this.controlsElt.weaponsUi.append(weaponUl)
+            this.controlsElt.weaponsUi.append(this.generateOneWeaponUI(this.weaponsInfos[i].weapon))
         }
     }
+
+    generateOneWeaponUI(weapon) {
+        const weaponInfo = $("<div class='weaponInfo'></div>")
+        const weaponImg = $(`<img src="./assets/dungeon/weapons/${weapon.image}\" alt="playerImg"/>`)
+        const weaponDamage = $(`<span>: ${weapon.damage}</span>`)
+
+        return weaponInfo.append(weaponImg, weaponDamage)
+    }
+
+    setOptionsModal() {
+        this.openModal()
+        this.closeModal()
+    }
+
+    openModal() {
+        this.controlsElt.btnRules.on("click", function () {
+                this.controlsElt.modalRules.css('display', 'block')
+            }.bind(this)
+        );
+    }
+
+    closeModal() {
+        this.controlsElt.spanClose.on("click", function () {
+                this.controlsElt.modalRules.css('display', 'none')
+            }.bind(this)
+        );
+    }
+
 }
 export { InterfaceWeapons }

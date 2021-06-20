@@ -1,6 +1,7 @@
-import {InterfacePlayers} from "./InterfacePlayers.js";
-import {InterfaceWeapons} from "./InterfaceWeapons.js";
-import {InterfaceBattleInfos} from "./InterfaceBattleInfos.js";
+import { InterfacePlayers } from "./InterfacePlayers.js";
+import { InterfaceWeapons } from "./InterfaceWeapons.js";
+import { InterfaceBattleInfos } from "./InterfaceBattleInfos.js";
+import { InterfaceMenu } from "./InterfaceMenu.js";
 
 class InterfaceUi {
 
@@ -11,11 +12,21 @@ class InterfaceUi {
         this.interfacePlayer = new InterfacePlayers(this.playersInfos)
         this.interfaceWeapon = new InterfaceWeapons(this.weaponsInfos)
         this.interfaceBattle = new InterfaceBattleInfos(this.playersInfos)
+        this.interfaceMenu = new InterfaceMenu()
     }
 
+
     displayUI () {
-        this.interfacePlayer.display()
-        this.interfaceWeapon.display()
+        this.interfaceMenu.removeInterfaceMenu()
+        this.interfacePlayer.displayPlayers()
+        this.interfaceWeapon.displayWeapons()
+        this.interfaceWeapon.setOptionsModal()
+    }
+
+    displayMainMenu() {
+        $('.game').css('display', 'none')
+        $('#board').empty()
+        this.interfaceMenu.displayInterfaceMainMenu()
     }
 }
 

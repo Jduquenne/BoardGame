@@ -1,4 +1,11 @@
-import { Board } from "./Engine/Board.js";
+import { InterfaceUi } from "./Interface/InterfaceUi.js";
 
-let board = new Board(10,10)
-board.initGame(10, 4)
+let menu = new InterfaceUi()
+menu.displayMainMenu()
+
+$('#backToMenu').on("click", function () {
+
+        menu.displayMainMenu()
+    }.bind(this)
+);
+

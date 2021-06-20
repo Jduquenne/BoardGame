@@ -18,7 +18,7 @@ class InterfaceBattleInfos {
 
     setBannerBattleStart(attacker, target) {
         const attackerImg = `<img class='attackerImg' src="./assets/dungeon/characters/${attacker.player.image}" alt="playerImg"/>`
-        const targetImg = `<img class='attackerImg' src="./assets/dungeon/characters/${target.player.image}" alt="playerImg"/>`
+        const targetImg = `<img class='targetImg' src="./assets/dungeon/characters/${target.player.image}" alt="playerImg"/>`
         this.banner = `${attackerImg}${attacker.player.name} lance le combat contre ${target.player.name} ! ${targetImg}`
         this.display()
     }
@@ -33,15 +33,16 @@ class InterfaceBattleInfos {
 
     setBannerPlayerDamage(attacker, target) {
         const attackerImg = `<img class='attackerImg' src="./assets/dungeon/characters/${attacker.player.image}" alt="playerImg"/>`
-        const targetImg = `<img class='attackerImg' src="./assets/dungeon/characters/${target.player.image}" alt="playerImg"/>`
-        this.banner = `${attackerImg}${attacker.player.name} attaque ${target.player.name}. ${target.player.name} perd <span class="bannerDmg">&nbsp${attacker.player.weapon.damage}&nbsp</span> points de vie.${targetImg}`
+        const targetImg = `<img class='targetImg' src="./assets/dungeon/characters/${target.player.image}" alt="playerImg"/>`
+
+        this.banner = `${attackerImg}${attacker.player.name} attaque ${target.player.name} / ${target.player.name} perd ${attacker.player.weapon.damage} points de vie.${targetImg}`
         this.display()
     }
 
     setBannerPlayerDamageWithDefense(attacker, target) {
         const attackerImg = `<img class='attackerImg' src="./assets/dungeon/characters/${attacker.player.image}" alt="playerImg"/>`
-        const targetImg = `<img class='attackerImg' src="./assets/dungeon/characters/${target.player.image}" alt="playerImg"/>`
-        this.banner = `${attackerImg}${attacker.player.name} met <span class="bannerDmg">&nbsp${attacker.player.weapon.damage / 2}&nbsp</span> dommages à ${target.player.name} ! Au tour de ${target.player.name}.${targetImg}`
+        const targetImg = `<img class='targetImg' src="./assets/dungeon/characters/${target.player.image}" alt="playerImg"/>`
+        this.banner = `${attackerImg}${attacker.player.name} met ${attacker.player.weapon.damage / 2} dommages à ${target.player.name} ! Au tour de ${target.player.name}.${targetImg}`
         this.display()
     }
 

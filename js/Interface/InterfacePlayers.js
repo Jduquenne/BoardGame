@@ -4,38 +4,43 @@ class InterfacePlayers {
         this.playersInfos = playersInfos;
 
         this.controlsElt = {
-            playersUi: $('#playersList')
+            playersInterface: $('.playerInterface')
         }
     }
 
-    display() {
-        this.controlsElt.playersUi.empty()
-        const playersTitle = $("<h1 class='playerTitle'>Players</h1>")
-        this.controlsElt.playersUi.append(playersTitle);
+    displayPlayers() {
+        this.controlsElt.playersInterface.empty()
         for (let i = 0; i < this.playersInfos.length; i++) {
-            this.controlsElt.playersUi.append( this.generateOnePlayerUI(this.playersInfos[i].player));
+            this.controlsElt.playersInterface.append( this.generateOnePlayerUI(this.playersInfos[i].player));
         }
     }
-    
-    generateOnePlayerUI(player){
-        const playerCard = $("<div class='playerCard'></div>")
 
+    generateOnePlayerUI(player) {
+        const playerCard = $("<div class='playerCard borderPixel'></div>")
+
+        const playerTopInfos = $("<div class='playerTopInfos'></div>")
+        const playerImg = $(`<img class='playerImg' src="./assets/dungeon/characters/${player.image}\" alt="${player.name}"/>`)
+
+        const playerInfos = $("<div class='playerInfos'></div>")
         const playerName = $(`<h2 class='playerName'>${player.name}</h2>`)
-        const playerHealth = $(`<p class='playerHealth'>${player.health}</p>`)
-        const playerImg = $(`<img class='playerImg' src="./assets/dungeon/characters/${player.image}\" alt="playerImg"/>`)
+        const playerHealth = $(`<p class='playerHealth'>Points de vie : ${player.health}</p>`)
+        playerInfos.append(playerName, playerHealth)
+        playerTopInfos.append(playerImg, playerInfos)
 
-        const playerWeapon = $(`<p class='playerWeaponInfos'>${player.weapon.name} <span>${player.weapon.damage}</span></p>`)
+        const playerWeapon = $(`<h2 class='playerWeapon'></h2>`)
         const playerWeaponImage = $(`<img class='playerWeaponImg' src="./assets/dungeon/weapons/${player.weapon.image}\" alt="weaponImg"/>`)
-        
-        return playerCard.append(playerName, playerHealth, playerImg, playerWeapon, playerWeaponImage)
+        const playerWeaponNameDamage = $(`<div class="playerWeaponName">${player.weapon.name} <span class="red">${player.weapon.damage}</span></div>`)
+        playerWeapon.append(playerWeaponImage, playerWeaponNameDamage)
+
+        return playerCard.append(playerTopInfos, playerWeapon)
     }
 
     setPlayerWeapon() {
-        this.display();
+        this.displayPlayers();
     }
 
     setPlayerHealth() {
-        this.display();
+        this.displayPlayers();
     }
 
 }
