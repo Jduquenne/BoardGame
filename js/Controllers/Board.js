@@ -1,9 +1,9 @@
-import { Cell } from "../Entite/Cell.js";
+import { Cell } from "../Models/Cell.js";
 import { Fight } from "./Fight.js";
 import { CELL_DECOR_FLOOR, CELL_DECOR_OBSTACLE } from "../AssetManager.js";
 import { WeaponsRepository } from "../Repository/WeaponsRepository.js";
 import { PlayersRepository } from "../Repository/PlayersRepository.js";
-import { InterfaceUi } from "../Interface/InterfaceUi.js";
+import { InterfaceUi } from "../View/InterfaceUi.js";
 
 class Board {
 
@@ -64,14 +64,15 @@ class Board {
                 lineElt.append( map.cellsArray[x][y].container );
             });
         });
-
     }
 
+    // Récupére le nombre d'obstacles selon la taille du plateau
     getNbObstacles() {
         const nbCells = this.maxLine * this.maxColumn
         return Math.round(nbCells / 10)
     }
 
+    // Récupére le nombre d'obstacles selon la taille du plateau
     getNbWeapons() {
         const nbCells = this.maxLine * this.maxColumn
         const nbWeapons = Math.ceil((nbCells / 20))
@@ -137,7 +138,7 @@ class Board {
         for (let k = 0 ; k < nbPlayers ; k++) {
             let [x,y] = this.randomCoordinates();
 
-            if (!this.cellsArray[x][y].isEmpty() || this.cellsArray[x][y].hasWeapon() || this.cellsArray[x][y].isSecurityZone()) {
+            if (!this.cellsArray[x][y].isEmpty() || this.cellsArray[x][y].hasWeapon() || this.cellsArray[x][y].hasPlayer() || this.cellsArray[x][y].isSecurityZone()) {
                 k--
             } else {
                 this.cellsArray[x][y].setPlayer(players[k])
@@ -153,20 +154,28 @@ class Board {
         }
     }
 
+    // Switch le joueur actif et récupére ses cellules de déplacement
     newRound(){
         this.changeActivePlayer()
         this.getCellsToGo()
     }
 
+    /**
+     *
+     * @param {Cell} cell
+     */
+    // Action grace au click
     actionOnClick(cell){
-        (cell)
+        // Vérifie si une cellule est dans l'état déplacement possible
         if(cell.isMovable) {
+            // Remplace la cellule de départ du joueur actif par une cellule vide
             const originCell = this.cellsArray[this.getActivePlayerInfos().position.row][this.getActivePlayerInfos().position.col]
             originCell.removePlayer();
 
             cell.setPlayer(this.getActivePlayerInfos().player)
             this.getActivePlayerInfos().position = this.cellIdToCoord(cell.id);
 
+            // Si le joueur peut se déplacer sur une arme alors il échange son arme avec celle de la cellule
             if (cell.hasWeapon()) {
                 const playerWeapon = this.getActivePlayerInfos().player.weapon
                 this.getActivePlayerInfos().player.weapon = cell.weapon
@@ -174,10 +183,11 @@ class Board {
                 cell.weapon = playerWeapon
                 this.interfaceUi.interfacePlayer.setPlayerWeapon(this.getActivePlayerInfos().player)
             }
-
+            // Retire les cellules de déplacement du joueur actif
             this.getActivePlayerInfos().cellToGo.map(cell => cell.removeCellToGo());
             this.getActivePlayerInfos().cellToGo = []
 
+            // Vérifie si un joueur ne soit pas a coté d'un joueur sinon il passe au joueur suivant
             if (cell.securityZone === true) {
                 this.interfaceUi.interfaceBattle.setBannerBattleStart(this.getActivePlayerInfos(), this.getWaitingPlayerInfos())
 
@@ -253,6 +263,7 @@ class Board {
         this.putAllSecurityZone(this.getWaitingPlayerInfos().position)
     }
 
+
     // Place les zones de sécurité
     putAllSecurityZone(cell) {
         if ((cell.col + 1) >= 0 && (cell.col + 1) <= this.maxColumn - 1){
@@ -318,6 +329,7 @@ class Board {
     // Joueur suivant
     changeActivePlayer() {
         this.activePlayer = (this.activePlayer + 1 ) % this.playersInfos.length;
+        this.interfaceUi.interfacePlayer.setActivePlayer(this.activePlayer)
     }
 
     // Récupére les informations du joueur actif
@@ -339,18 +351,28 @@ class Board {
         return [x,y];
     }
 
+    /**
+     *
+     * @param {string} id
+     * @returns {{col: number, row: number}}
+     */
+    // Converti un ID
     cellIdToCoord(id){
         let split = id.split("-")
         return {row: Number(split[0]), col: Number(split[1])}
-        // return {row: Math.floor(id / this.maxLine), col: id % this.maxColumn};
     }
 
+    // Trouve et retourne la cellule selon un ID
     findCell(id) {
         let cellCoord = this.cellIdToCoord(id)
-        // (id, cellCoord)
         return this.cellsArray[cellCoord.row][cellCoord.col];
     }
 
+    /**
+     *
+     * @param {Array}array
+     */
+    // Mélange un tableau
     shuffleArray(array) {
         for (let i = array.length - 1; i > 0; i--) {
             let j = Math.floor(Math.random() * (i + 1));

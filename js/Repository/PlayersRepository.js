@@ -1,5 +1,5 @@
-import {Weapon} from "../Entite/Weapon.js";
-import {Player} from "../Entite/Player.js";
+import {Weapon} from "../Models/Weapon.js";
+import {Player} from "../Models/Player.js";
 
 const data = [
     new Player({ name:'Björn', health: 100, image : "Björn.png"}),

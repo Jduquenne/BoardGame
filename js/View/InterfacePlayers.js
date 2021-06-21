@@ -1,7 +1,9 @@
 class InterfacePlayers {
 
     constructor(playersInfos) {
-        this.playersInfos = playersInfos;
+        this.playersInfos = playersInfos
+
+        this.activePlayer = 0
 
         this.controlsElt = {
             playersInterface: $('.playerInterface')
@@ -11,12 +13,13 @@ class InterfacePlayers {
     displayPlayers() {
         this.controlsElt.playersInterface.empty()
         for (let i = 0; i < this.playersInfos.length; i++) {
-            this.controlsElt.playersInterface.append( this.generateOnePlayerUI(this.playersInfos[i].player));
+            this.controlsElt.playersInterface.append( this.generateOnePlayerUI(this.playersInfos[i].player, i === this.activePlayer));
         }
     }
 
-    generateOnePlayerUI(player) {
-        const playerCard = $("<div class='playerCard borderPixel'></div>")
+    generateOnePlayerUI(player, isActive = false) {
+
+        const playerCard = $("<div class='playerCard borderPixel " + ((isActive)?' active ' : '')+"'></div>")
 
         const playerTopInfos = $("<div class='playerTopInfos'></div>")
         const playerImg = $(`<img class='playerImg' src="./assets/dungeon/characters/${player.image}\" alt="${player.name}"/>`)
@@ -41,6 +44,11 @@ class InterfacePlayers {
 
     setPlayerHealth() {
         this.displayPlayers();
+    }
+
+    setActivePlayer(player) {
+        this.activePlayer = player
+        this.displayPlayers()
     }
 
 }

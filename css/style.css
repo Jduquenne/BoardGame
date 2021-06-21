@@ -1,14 +1,17 @@
-@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap');
+/*@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap');*/
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
 
 :root {
     --primary: #424242;
     --secondary: #E73535;
-    --third: #2B9FE2;
+    --third: #344973;
 }
 
 body {
     background-color: var(--third);
-    font-family: 'Source Code Pro', monospace;
+    /*font-family: 'Source Code Pro', monospace;*/
+    font-family: 'VT323', monospace;
+    font-size: 24px;
     margin: 0;
 }
 
@@ -54,6 +57,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-top: 50px;
 }
 
 .btn {
@@ -86,12 +90,12 @@ body {
     border-image-slice: 5;
     border-image-width: 6;
     border-image-repeat: stretch;
-    border-image-source: url(border.svg);
+    border-image-source: url(../assets/border.svg);
     border-image-outset: 0;
 }
 
 .fatFont {
-    font-size: 30px;
+    font-size: 50px;
     margin: 15px;
 }
 
@@ -148,22 +152,14 @@ body {
     display: flex;
 }
 
-.menuSelect .btn:hover {
-    color: var(--primary);
-}
-.menuSelectOptions .btn {
-    color: var(--primary);
-}
-
 .spinner {
     display: inline-block;
     text-align: center;
     background-color: inherit;
     color: #fff8c0;
-    font-family: inherit;
+    font-size: 24px;
     width: 40px;
     padding: 20px 30px;
-    border-style: solid;
     border-width: 5px;
     border-image-repeat: stretch;
 }
@@ -179,10 +175,18 @@ body {
     box-sizing: border-box;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
-    /*transform: rotateX(45deg) rotateZ(45deg);*/
-    /*transform-style: preserve-3d;*/
-    /*transition: 1s;*/
     border: 5px solid var(--secondary);
+    transform-style: preserve-3d;
+    transition: 1.5s;
+}
+
+.isometric {
+    transform: rotateX(45deg) rotateZ(45deg);
+    margin-right: 10vw;
+}
+
+#topView {
+    display: none;
 }
 
 .lines {
@@ -286,9 +290,9 @@ body {
 }
 
 .playersTitle {
-    font-size: 26px;
+    font-size: 35px;
     text-align: center;
-    width: 100%;
+    width: 400px;
     padding-bottom: 5px;
     border-bottom: 3px solid #E73535;
 }
@@ -304,11 +308,15 @@ body {
     flex-direction: column;
     align-items: flex-start;
     justify-content: space-evenly;
-    background-color: #344973;
+    background-color: var(--third);
     height: 200px;
     width: 350px;
-    margin: 15px;
-    padding: 10px 20px;
+    margin: 5px;
+    padding: 20px 20px;
+}
+
+.active {
+    box-shadow: 0 0 0 0.1875rem white, 0 0 0 0.375rem #234959;
 }
 
 .playerTopInfos {
@@ -330,12 +338,12 @@ body {
 }
 
 .playerName {
-    font-size: 20px;
+    font-size: 26px;
     color: #dddddd;
 }
 
 .playerHealth {
-    font-size: 17px;
+    font-size: 20px;
     color: #dddddd;
 }
 
@@ -353,7 +361,7 @@ body {
 }
 
 .playerWeaponName {
-    font-size: 20px;
+    font-size: 24px;
     color: #dddddd;
     margin-left: 15px;
 }
@@ -432,9 +440,20 @@ body {
 
 .battleModal {
     position: fixed;
+    z-index: 99;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,.2);
+}
+
+.battleBanner {
+    position: fixed;
     justify-content: center;
     z-index: 1;
-    top: 42%;
+    top: 45%;
     left: 0;
     height: 100px;
     width: 100%;
@@ -446,16 +465,18 @@ body {
     justify-content: center;
     align-items: center;
     font-size: 24px;
+    color: #dddddd;
 }
 
-.battleModal .attackerImg {
+.battleBanner .attackerImg {
+    margin: 0;
     height: 190px;
 }
-.battleModal .targetImg {
+.battleBanner .targetImg {
     height: 190px;
     transform: scaleX(-1);
 }
-.battleModal .bannerDmg {
+.battleBanner .bannerDmg {
     color: red;
     font-size: 30px;
 }
