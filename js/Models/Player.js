@@ -4,10 +4,7 @@ import {AssetManager} from "../AssetManager.js";
 class Player {
     /**
      *
-     * @param {string} name
-     * @param {number} health
-     * @param {Weapon} weapon
-     * @param {string} image
+     * @param {Object} options
      */
     constructor(options) {
         this.name = options.name || "Joueur";

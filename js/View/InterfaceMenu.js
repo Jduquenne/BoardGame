@@ -1,9 +1,9 @@
-import { Board } from "../Engine/Board.js";
+import { Board } from "../Controllers/Board.js";
 
 class InterfaceMenu {
 
     constructor() {
-        this.spinners = [
+        this.inputs = [
             {
                 name : "Hauteur du plateau",
                 value : 10,
@@ -17,9 +17,6 @@ class InterfaceMenu {
                 max: 12
             }
         ]
-
-        this.boardLine = this.spinners[0].value
-        this.boardColumn = this.spinners[1].value
 
         this.controlsElt = {
             app : $('.app'),
@@ -67,7 +64,7 @@ class InterfaceMenu {
 
     startCustomGame() {
         $('.game').css('display', 'flex');
-        let board = new Board(this.boardLine,this.boardColumn)
+        let board = new Board(this.inputs[0].value,this.inputs[1].value)
         board.initGame()
     }
 
@@ -96,16 +93,33 @@ class InterfaceMenu {
     createMenuSelectOptions() {
         const menuSelectOptions = $(`<div class="menuSelectOptions"></div>`)
         const groupSpinner = $(`<div class="groupSpinner"></div>`)
-        for (let i = 0; i < this.spinners.length; i++) {
-            const spinnerTitle = $(`<h2 class="whiteFont">${this.spinners[i].name}</h2>`)
+        for (let i = 0; i < this.inputs.length; i++) {
+            const spinnerTitle = $(`<h2 class="whiteFont">${this.inputs[i].name}</h2>`)
 
             const nbSpinner = $(`<div class="nb-spinner"></div>`)
-            const btnMinus = $(`<button class="btn borderPixel fatFont" id="remove">-</button>`)
-            const spinnerValue = $(`<input disabled class="spinner" type="text" value="${this.spinners[i].value}" min="${this.spinners[i].min}" max="${this.spinners[i].max}"/>`)
-            const btnAdd = $(`<button class="btn borderPixel fatFont" id="add">+</button>`)
+            const input = $(`<input disabled class="spinner" type="text" value="${this.inputs[i].value}" min="${this.inputs[i].min}" max="${this.inputs[i].max}" step="1"/>`)
 
-            nbSpinner.append(btnMinus, spinnerValue, btnAdd)
-            groupSpinner.append(spinnerTitle, nbSpinner);
+            const btnMinus = $(`<button class="btn borderPixel fatFont" id="decrement">-</button>`)
+            const btnAdd = $(`<button class="btn borderPixel fatFont" id="increment">+</button>`)
+
+            btnMinus.on("click", function () {
+                if (input.val() > this.inputs[i].min ) {
+                    input.val(parseInt(input.val()) - 1)
+                    this.inputs[i].value = input.val()
+                }
+                }.bind(this)
+            );
+
+            btnAdd.on("click", function () {
+                if (input.val() < this.inputs[i].max ) {
+                    input.val(parseInt(input.val()) + 1)
+                    this.inputs[i].value = input.val()
+                }
+                }.bind(this)
+            );
+
+            nbSpinner.append(btnMinus, input, btnAdd)
+            groupSpinner.append(spinnerTitle, nbSpinner)
         }
         menuSelectOptions.append(groupSpinner)
 
@@ -119,8 +133,6 @@ class InterfaceMenu {
         this.controlsElt.mainMenu.append(menuSelectOptions, groupBtn)
         this.controlsElt.app.append(this.controlsElt.mainMenu)
     }
-
-    setValue
 
 }
 export { InterfaceMenu }

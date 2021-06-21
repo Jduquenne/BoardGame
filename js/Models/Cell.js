@@ -91,8 +91,6 @@ class Cell {
         this.display();
     }
 
-    // GET FUNCTIONS
-
     // CHECK FUNCTIONS
 
     isEmpty() {
@@ -101,10 +99,6 @@ class Cell {
 
     isSecurityZone() {
         return this.securityZone === true;
-    }
-
-    isObstacleAndSecurityZone() {
-        return this.securityZone === true && this.decor === CELL_DECOR_OBSTACLE;
     }
 
     hasWeapon() {

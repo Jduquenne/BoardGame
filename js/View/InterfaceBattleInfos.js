@@ -4,6 +4,7 @@ class InterfaceBattleInfos {
         this.banner = "";
 
         this.controlsElt = {
+            battleModal: $('.battleModal'),
             battleInfos: $('#battleInfos')
         }
     }
@@ -12,7 +13,7 @@ class InterfaceBattleInfos {
         this.controlsElt.battleInfos.empty()
         const battleInfos = $(`<h2 class='battleInfosText'>${this.banner}</h2>`)
         this.controlsElt.battleInfos.append(battleInfos)
-        this.controlsElt.battleInfos.removeClass('hidden')
+        this.controlsElt.battleModal.removeClass('hidden')
         this.controlsElt.battleInfos.css('display', 'flex')
     }
 
