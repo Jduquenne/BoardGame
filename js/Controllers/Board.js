@@ -329,6 +329,7 @@ class Board {
     // Joueur suivant
     changeActivePlayer() {
         this.activePlayer = (this.activePlayer + 1 ) % this.playersInfos.length;
+        this.interfaceUi.interfacePlayer.setActivePlayer(this.activePlayer)
     }
 
     // Récupére les informations du joueur actif
