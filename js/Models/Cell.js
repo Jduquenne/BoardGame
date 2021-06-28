@@ -4,7 +4,7 @@ import {
     AssetManager
 } from "../AssetManager.js";
 
-
+// Classe Cellule - Objet principal du plateau
 class Cell {
     /**
      *

@@ -3,7 +3,7 @@ import { Fight } from "./Fight.js";
 import { CELL_DECOR_FLOOR, CELL_DECOR_OBSTACLE } from "../AssetManager.js";
 import { WeaponsRepository } from "../Repository/WeaponsRepository.js";
 import { PlayersRepository } from "../Repository/PlayersRepository.js";
-import { InterfaceUi } from "../View/InterfaceUi.js";
+import { InterfaceUi } from "../Views/InterfaceUi.js";
 
 class Board {
 
@@ -329,7 +329,6 @@ class Board {
     // Joueur suivant
     changeActivePlayer() {
         this.activePlayer = (this.activePlayer + 1 ) % this.playersInfos.length;
-        this.interfaceUi.interfacePlayer.setActivePlayer(this.activePlayer)
     }
 
     // Récupére les informations du joueur actif
@@ -356,7 +355,7 @@ class Board {
      * @param {string} id
      * @returns {{col: number, row: number}}
      */
-    // Converti un ID
+    // Converti un ID en coordonnée
     cellIdToCoord(id){
         let split = id.split("-")
         return {row: Number(split[0]), col: Number(split[1])}
@@ -370,7 +369,7 @@ class Board {
 
     /**
      *
-     * @param {Array}array
+     * @param {Array} array
      */
     // Mélange un tableau
     shuffleArray(array) {
