@@ -11,6 +11,7 @@ class InterfaceWeapons {
         }
     }
 
+    // Affiche l'interface des armes sur le terrain
     displayWeapons() {
         this.controlsElt.weaponsUi.empty()
         for (let i = 0; i < this.weaponsInfos.length; i++) {
@@ -18,6 +19,7 @@ class InterfaceWeapons {
         }
     }
 
+    // créer une arme dans l'interface
     generateOneWeaponUI(weapon) {
         const weaponInfo = $("<div class='weaponInfo'></div>")
         const weaponImg = $(`<img src="./assets/dungeon/weapons/${weapon.image}\" alt="playerImg"/>`)
@@ -26,11 +28,13 @@ class InterfaceWeapons {
         return weaponInfo.append(weaponImg, weaponDamage)
     }
 
-    setOptionsModal() {
+    // initialise les boutons du modal des régles
+    initOptionsModal() {
         this.openModal()
         this.closeModal()
     }
 
+    // Ouvre le modal des régles avec l'interface des armes
     openModal() {
         this.controlsElt.btnRules.on("click", function () {
                 this.controlsElt.modalRules.css('display', 'block')
@@ -38,6 +42,7 @@ class InterfaceWeapons {
         );
     }
 
+    // Ferme le modal des régles avec l'interface des armes
     closeModal() {
         this.controlsElt.spanClose.on("click", function () {
                 this.controlsElt.modalRules.css('display', 'none')

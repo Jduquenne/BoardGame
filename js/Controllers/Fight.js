@@ -1,15 +1,15 @@
 class Fight {
 
-    constructor(attacker, target, ui) {
+    constructor(attacker, target, interfaceUi) {
         this.attacker = attacker;
         this.target = target;
 
-        this.ui = ui;
+        this.interfaceUi = interfaceUi;
     }
 
     // Affiche la bannière Choix d'action
     fight() {
-        this.ui.interfaceBattle.setBannerAttackOrDefence(this.attacker.player)
+        this.interfaceUi.interfaceBattle.setBannerAttackOrDefence(this.attacker.player)
 
         // Action qui effectue une attack
         $("#attack").on("click", function () {
@@ -34,16 +34,16 @@ class Fight {
 
             this.checkHealth()
 
-            this.ui.interfacePlayer.setPlayerHealth(this.target)
-            this.ui.interfaceBattle.setBannerPlayerDamageWithDefense(this.attacker, this.target)
+            this.interfaceUi.interfacePlayer.setPlayerHealth(this.target)
+            this.interfaceUi.interfaceBattle.setBannerPlayerDamageWithDefense(this.attacker, this.target)
         } else {
             // sinon l'attaquant attaque avec 100% des dégats de son arme
             this.target.player.health -= this.attacker.player.weapon.damage;
 
             this.checkHealth()
 
-            this.ui.interfacePlayer.setPlayerHealth(this.target)
-            this.ui.interfaceBattle.setBannerPlayerDamage(this.attacker, this.target)
+            this.interfaceUi.interfacePlayer.setPlayerHealth(this.target)
+            this.interfaceUi.interfaceBattle.setBannerPlayerDamage(this.attacker, this.target)
         }
         setTimeout(() => this.checkVictory(), 1500)
     }
@@ -51,7 +51,7 @@ class Fight {
     // L'attaquant passe en posture défensive
     playerDefense() {
         this.attacker.player.defense = true;
-        this.ui.interfaceBattle.setBannerPlayerDefense(this.attacker, this.target)
+        this.interfaceUi.interfaceBattle.setBannerPlayerDefense(this.attacker, this.target)
         setTimeout(() => this.checkVictory(), 1500)
     }
 
@@ -65,7 +65,7 @@ class Fight {
     // Vérifie si la cible à ses points de vie à 0
     checkVictory() {
         if (this.target.player.health <= 0) {
-            this.ui.interfaceBattle.setBannerPlayerWin(this.attacker)
+            this.interfaceUi.interfaceBattle.setBannerPlayerWin(this.attacker)
             setTimeout(() => this.newGame(), 1500)
         } else {
             this.changeFighter();
@@ -80,7 +80,7 @@ class Fight {
 
     // Choix d'une nouvelle partie ou quitter le jeu
     newGame() {
-        this.ui.interfaceBattle.setBannerNewGame()
+        this.interfaceUi.interfaceBattle.setBannerNewGame()
 
         $("#newGame").on("click", function () {
                 document.location.reload()

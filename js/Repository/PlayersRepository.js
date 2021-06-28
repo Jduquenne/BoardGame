@@ -1,6 +1,6 @@
-import {Weapon} from "../Models/Weapon.js";
 import {Player} from "../Models/Player.js";
 
+// Base de donnée des joueurs disponible - Ajout de joueur simplifié
 const data = [
     new Player({ name:'Björn', health: 100, image : "Björn.png"}),
     new Player({ name:'Bolvar', health: 100, image : "Bolvar.png"}),
@@ -19,10 +19,6 @@ const data = [
     new Player({ name:'Yggdrassil', health: 100, image : "Yggdrassil.png"}),
 ]
 class PlayersRepository {
-
-    static findPlayerByName(name){
-        return data.filter(player => player.name === name)
-    }
 
     static findAllPlayers(){
         return data;

@@ -20,7 +20,7 @@ class InterfaceUi {
         this.interfaceMenu.removeInterfaceMenu()
         this.interfacePlayer.displayPlayers()
         this.interfaceWeapon.displayWeapons()
-        this.interfaceWeapon.setOptionsModal()
+        this.interfaceWeapon.initOptionsModal()
     }
 
     displayMainMenu() {

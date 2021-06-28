@@ -1,3 +1,4 @@
+// Base de donnée des armes disponible - Ajout d'arme simplifié
 const data =[
     {name:'Excalibur', damage: 40, image : "Excalibur.png"},
     {name:'Deuilleombre', damage: 40, image : "Deuilleombre.png"},
@@ -13,10 +14,6 @@ const data =[
     {name:'Firefox', damage: 15, image : "Firefox.png"},
 ]
 class WeaponsRepository {
-
-    findWeaponByName(name){
-        return data.filter(weapon => weapon.name === name)
-    }
 
     static findAllWeapons(){
         return data;

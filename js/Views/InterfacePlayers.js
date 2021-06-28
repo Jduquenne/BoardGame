@@ -10,6 +10,7 @@ class InterfacePlayers {
         }
     }
 
+    // Affiche l'interface joueurs
     displayPlayers() {
         this.controlsElt.playersInterface.empty()
         for (let i = 0; i < this.playersInfos.length; i++) {
@@ -17,6 +18,7 @@ class InterfacePlayers {
         }
     }
 
+    // créer une card joueur
     generateOnePlayerUI(player, isActive = false) {
 
         const playerCard = $("<div class='playerCard borderPixel " + ((isActive)?' active ' : '')+"'></div>")
@@ -38,14 +40,17 @@ class InterfacePlayers {
         return playerCard.append(playerTopInfos, playerWeapon)
     }
 
+    // Actualise l'arme du joueur
     setPlayerWeapon() {
         this.displayPlayers();
     }
 
+    // Actualise la vie du joueur
     setPlayerHealth() {
         this.displayPlayers();
     }
 
+    // Actualise l'affichage du joueur actif
     setActivePlayer(player) {
         this.activePlayer = player
         this.displayPlayers()

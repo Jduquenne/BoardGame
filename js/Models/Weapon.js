@@ -1,3 +1,4 @@
+// Classe Arme - Les armes sont manipuler par les joueurs
 class Weapon {
     /**
      *

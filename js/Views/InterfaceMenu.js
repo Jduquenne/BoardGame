@@ -3,6 +3,7 @@ import { Board } from "../Controllers/Board.js";
 class InterfaceMenu {
 
     constructor() {
+        // Ajout d'un autre input facilité
         this.inputs = [
             {
                 name : "Hauteur du plateau",
@@ -17,13 +18,13 @@ class InterfaceMenu {
                 max: 12
             }
         ]
-
         this.controlsElt = {
             app : $('.app'),
             mainMenu: $('.mainMenu')
         }
     }
 
+    // Affiche le menu principale
     displayInterfaceMainMenu() {
         this.controlsElt.mainMenu.empty()
         this.createBrand()
@@ -40,6 +41,7 @@ class InterfaceMenu {
         );
     }
 
+    // Affiche le menu options
     displayInterfaceOptions() {
         this.controlsElt.mainMenu.empty()
         this.createBrand()
@@ -56,29 +58,34 @@ class InterfaceMenu {
         );
     }
 
+    // Fonction qui permet de lancer une partie par défaut
     startDefaultGame() {
         $('.game').css('display', 'flex');
         let board = new Board(10,10)
         board.initGame()
     }
 
+    // Fonction qui permet de lancer une partie customisé
     startCustomGame() {
         $('.game').css('display', 'flex');
         let board = new Board(this.inputs[0].value,this.inputs[1].value)
         board.initGame()
     }
 
+    // Cache le menu prinpal
     removeInterfaceMenu() {
         this.controlsElt.mainMenu.empty()
         this.controlsElt.mainMenu.remove()
     }
 
+    // Créer le logo
     createBrand() {
         const logo = $(`<h1 class='title fatFont'>Board Game</h1>`)
         this.controlsElt.mainMenu.append(logo)
         this.controlsElt.app.append(this.controlsElt.mainMenu)
     }
 
+    // Créer le menu principal
     createMenuSelect() {
         const menuSelectDiv = $(`<div class="menuSelect"></div>`)
 
@@ -90,6 +97,7 @@ class InterfaceMenu {
         this.controlsElt.app.append(this.controlsElt.mainMenu)
     }
 
+    // Créer le menu option
     createMenuSelectOptions() {
         const menuSelectOptions = $(`<div class="menuSelectOptions"></div>`)
         const groupSpinner = $(`<div class="groupSpinner"></div>`)
