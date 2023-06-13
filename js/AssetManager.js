@@ -13,6 +13,11 @@ export class AssetManager
         }
     }
 
+    // Récupére l'image d'un bonus d'une cellule
+    static getBonusImg(bonus){
+        return `./assets/dungeon/bonus/${bonus.image}`;
+    }
+
     // Récupére l'image d'arme d'une cellule
     static getWeaponImg(weapon){
         return `./assets/dungeon/weapons/${weapon.image}`;

@@ -14,7 +14,7 @@ class Player {
         this.image = options.image;
 
         // MaxMove représente la distance de déplacement d'un joueur, il est donc possible de donner la possibilité au joueur de se déplacer plus ou moins loin
-        this.maxMove = 3;
+        this.maxMove = options.maxMove;
     }
 }
 

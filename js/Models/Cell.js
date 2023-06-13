@@ -19,6 +19,7 @@ class Cell {
         this.isMovable = false;
         this.securityZone = false;
         this.weapon = null;
+        this.bonus = null;
         this.player = null;
         this.onClick = onClick;
         this.display();
@@ -46,6 +47,11 @@ class Cell {
             this.container.addClass('cellToMove');
         }
 
+        if (this.bonus) {
+            this.container.css('background-image', "url('" + AssetManager.getBonusImg(this.bonus) + "'), url('" + AssetManager.getWhatInsideImg(this.decor) + "')");
+            this.container.addClass('bonus');
+        }
+
         if (this.weapon) {
             this.container.css('background-image', "url('" + AssetManager.getWeaponImg(this.weapon) + "'), url('" + AssetManager.getWhatInsideImg(this.decor) + "')");
             this.container.addClass('weapon');
@@ -62,6 +68,15 @@ class Cell {
     setDecor(decor) {
         this.decor = decor;
         this.display()
+    }
+
+    /**
+     *
+     * @param {{name: string, type: string, amount: number, image: string}} bonus
+     */
+    setBonus(bonus) {
+        this.bonus = bonus;
+        this.display();
     }
 
     /**
@@ -101,6 +116,10 @@ class Cell {
         return this.securityZone === true;
     }
 
+    hasBonus() {
+        return this.bonus !== null;
+    }
+
     hasWeapon() {
         return this.weapon !== null;
     }
@@ -110,6 +129,11 @@ class Cell {
     }
 
     // REMOVE FUNCTIONS
+
+    removeBonus() {
+        this.bonus = null;
+        this.display();
+    }
 
     removeWeapon() {
         this.weapon = null;

@@ -4,6 +4,7 @@ import { CELL_DECOR_FLOOR, CELL_DECOR_OBSTACLE } from "../AssetManager.js";
 import { WeaponsRepository } from "../Repository/WeaponsRepository.js";
 import { PlayersRepository } from "../Repository/PlayersRepository.js";
 import { InterfaceUi } from "../Views/InterfaceUi.js";
+import { BonusRepository } from "../Repository/BonusRepository.js";
 
 class Board {
 
@@ -15,6 +16,7 @@ class Board {
 
         this.playersInfos = []
         this.weaponsInfos = []
+        this.bonusInfos = []
 
         this.activePlayer = 0;
 
@@ -24,9 +26,10 @@ class Board {
     // Initialise une partie sur le plateau généré
     initGame() {
         this.generateBoard()
-        this.putObstacles(this.getNbObstacles());
-        this.putWeapons(this.getNbWeapons());
-        this.putPlayers(2);
+        this.putObstacles(this.getNbObstacles())
+        this.putBonus()
+        this.putWeapons(this.getNbWeapons())
+        this.putPlayers(2)
 
         this.getCellsToGo()
         this.initInterface()
@@ -66,6 +69,7 @@ class Board {
         });
     }
 
+
     // Récupére le nombre d'obstacles selon la taille du plateau
     getNbObstacles() {
         const nbCells = this.maxLine * this.maxColumn
@@ -80,6 +84,37 @@ class Board {
             return 6
         } else {
             return Math.ceil((nbCells / 20))
+        }
+    }
+
+    /**
+     *
+     * @param {number} nbBonus
+     */
+    // Ajouter bonus sur cases vide aléatoires
+    putBonus() {
+        let bonus = BonusRepository.findAllBonus()
+        this.shuffleArray(bonus);
+        for (let k = 0 ; k < 3 ; k++) {
+            let [x,y] = this.randomCoordinates();
+            if (!this.cellsArray[x][y].isEmpty() || this.cellsArray[x][y].hasWeapon() || this.cellsArray[x][y].hasPlayer() || this.cellsArray[x][y].isSecurityZone()) {
+                k--
+            } else {
+                if (this.bonusInfos.length <= bonus.length) {
+                    const bonusExist = this.bonusInfos.find((info) => {
+                        return info.bonus === bonus[k]
+                    })
+                    if(!bonusExist) {
+                        this.bonusInfos.push(
+                            {
+                                bonus: bonus[k],
+                                position: this.cellIdToCoord(this.cellsArray[x][y].id)
+                            }
+                        )
+                        this.cellsArray[x][y].setBonus(bonus[k]);
+                    }
+                }
+            }
         }
     }
 
@@ -111,7 +146,7 @@ class Board {
         for (let k = 0 ; k < nbWeapon ; k++) {
             let [x,y] = this.randomCoordinates();
 
-            if (!this.cellsArray[x][y].isEmpty()) {
+            if (!this.cellsArray[x][y].isEmpty() || this.cellsArray[x][y].hasWeapon() || this.cellsArray[x][y].hasPlayer() || this.cellsArray[x][y].isSecurityZone()) {
                 k--
             } else {
                 this.cellsArray[x][y].setWeapon(weapons[k]);
@@ -182,6 +217,19 @@ class Board {
                 cell.removeWeapon(cell.weapon)
                 cell.weapon = playerWeapon
                 this.interfaceUi.interfacePlayer.setPlayerWeapon(this.getActivePlayerInfos().player)
+            }
+            // Si le joueur se déplace sur le bonus
+            if (cell.hasBonus()) {
+                if (cell.bonus.type === 'move') {
+                    this.getActivePlayerInfos().player.maxMove = this.getActivePlayerInfos().player.maxMove + cell.bonus.amount
+                } else if (cell.bonus.type === 'life') {
+                    this.getActivePlayerInfos().player.health = this.getActivePlayerInfos().player.health + cell.bonus.amount
+                    // this.interfaceUi.interfacePlayer.playersInfos[this.activePlayer].player.health = this.getActivePlayerInfos().player.health
+                }
+                this.bonusInfos = this.bonusInfos.filter((info) => info.bonus !== cell.bonus)
+                cell.container.removeClass('bonus')
+                cell.removeBonus()
+                this.putBonus()
             }
             // Retire les cellules de déplacement du joueur actif
             this.getActivePlayerInfos().cellToGo.map(cell => cell.removeCellToGo());
