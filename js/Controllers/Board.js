@@ -95,7 +95,7 @@ class Board {
     putBonus() {
         let bonus = BonusRepository.findAllBonus()
         this.shuffleArray(bonus);
-        for (let k = 0 ; k < 3 ; k++) {
+        for (let k = 0 ; k < bonus.length ; k++) {
             let [x,y] = this.randomCoordinates();
             if (!this.cellsArray[x][y].isEmpty() || this.cellsArray[x][y].hasWeapon() || this.cellsArray[x][y].hasPlayer() || this.cellsArray[x][y].isSecurityZone()) {
                 k--
