@@ -8,9 +8,11 @@ import { BonusRepository } from "../Repository/BonusRepository.js";
 
 class Board {
 
-    constructor(maxLine, maxColumn) {
+    constructor(maxLine, maxColumn, nbObstacles, nbWeapons) {
         this.maxLine = maxLine;
         this.maxColumn = maxColumn;
+        this.nbObstacles = nbObstacles
+        this.nbWeapons = nbWeapons
 
         this.cellsArray = [];
 
@@ -26,9 +28,9 @@ class Board {
     // Initialise une partie sur le plateau généré
     initGame() {
         this.generateBoard()
-        this.putObstacles(this.getNbObstacles())
+        this.putObstacles(this.nbObstacles)
         this.putBonus()
-        this.putWeapons(this.getNbWeapons())
+        this.putWeapons(this.nbWeapons)
         this.putPlayers(2)
 
         this.getCellsToGo()
@@ -70,22 +72,22 @@ class Board {
     }
 
 
-    // Récupére le nombre d'obstacles selon la taille du plateau
-    getNbObstacles() {
-        const nbCells = this.maxLine * this.maxColumn
-        return Math.round(nbCells / 10)
-    }
+    // // Récupére le nombre d'obstacles selon la taille du plateau
+    // getNbObstacles() {
+    //     const nbCells = this.maxLine * this.maxColumn
+    //     return Math.round(nbCells / 10)
+    // }
 
     // Récupére le nombre d'obstacles selon la taille du plateau
-    getNbWeapons() {
-        const nbCells = this.maxLine * this.maxColumn
-        const nbWeapons = Math.ceil((nbCells / 20))
-        if (nbWeapons >= 6) {
-            return 6
-        } else {
-            return Math.ceil((nbCells / 20))
-        }
-    }
+    // getNbWeapons() {
+    //     const nbCells = this.maxLine * this.maxColumn
+    //     const nbWeapons = Math.ceil((nbCells / 20))
+    //     if (nbWeapons >= 6) {
+    //         return 6
+    //     } else {
+    //         return Math.ceil((nbCells / 20))
+    //     }
+    // }
 
     /**
      *

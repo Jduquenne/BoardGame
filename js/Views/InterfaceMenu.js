@@ -16,7 +16,26 @@ class InterfaceMenu {
                 value : 10,
                 min: 7,
                 max: 12
+            },
+            {
+                name : "Nombre d'obstacles",
+                value : 10,
+                min: 7,
+                max: 20
+            },
+            {
+                name : "Nombre d'armes",
+                value : 3,
+                min: 1,
+                max: 5
+            },
+            {
+                name : "Nombre de bonus",
+                value : 3,
+                min: 1,
+                max: 5
             }
+            
         ]
         this.controlsElt = {
             app : $('.app'),
@@ -61,14 +80,14 @@ class InterfaceMenu {
     // Fonction qui permet de lancer une partie par défaut
     startDefaultGame() {
         $('.game').css('display', 'flex');
-        let board = new Board(10,10)
+        let board = new Board(10,10,10,3,3)
         board.initGame()
     }
 
     // Fonction qui permet de lancer une partie customisé
     startCustomGame() {
         $('.game').css('display', 'flex');
-        let board = new Board(this.inputs[0].value,this.inputs[1].value)
+        let board = new Board(this.inputs[0].value,this.inputs[1].value, this.inputs[2].value, this.inputs[3].value, this.inputs[4].value)
         board.initGame()
     }
 
@@ -80,7 +99,7 @@ class InterfaceMenu {
 
     // Créer le logo
     createBrand() {
-        const logo = $(`<h1 class='title fatFont'>Board Game</h1>`)
+        const logo = $(`<div class='title h150px fatFont'>Board Game</div>`)
         this.controlsElt.mainMenu.append(logo)
         this.controlsElt.app.append(this.controlsElt.mainMenu)
     }
@@ -100,11 +119,10 @@ class InterfaceMenu {
     // Créer le menu option
     createMenuSelectOptions() {
         const menuSelectOptions = $(`<div class="menuSelectOptions"></div>`)
-        const groupSpinner = $(`<div class="groupSpinner"></div>`)
         for (let i = 0; i < this.inputs.length; i++) {
-            const spinnerTitle = $(`<h2 class="whiteFont">${this.inputs[i].name}</h2>`)
+            const spinnerTitle = $(`<div class="whiteFont">${this.inputs[i].name}</div>`)
 
-            const nbSpinner = $(`<div class="nb-spinner"></div>`)
+            const nbSpinner = $(`<div class="nb-spinner-${i}"></div>`)
             const input = $(`<input disabled class="spinner" type="text" value="${this.inputs[i].value}" min="${this.inputs[i].min}" max="${this.inputs[i].max}" step="1"/>`)
 
             const btnMinus = $(`<button class="btn borderPixel fatFont" id="decrement">-</button>`)
@@ -126,12 +144,11 @@ class InterfaceMenu {
                 }.bind(this)
             );
 
-            nbSpinner.append(btnMinus, input, btnAdd)
-            groupSpinner.append(spinnerTitle, nbSpinner)
+            nbSpinner.append(spinnerTitle, btnAdd, input, btnMinus)
+            menuSelectOptions.append(nbSpinner)
         }
-        menuSelectOptions.append(groupSpinner)
 
-        const groupBtn = $(`<div class="groupBtnColumn marginTop"></div>`)
+        const groupBtn = $(`<div class="flex h150px"></div>`)
 
         const btnReturn = $(`<button class="btn borderPixel fatFont" id="returnMainMenu">Retour</button>`)
         const btnStartBattle = $(`<button class="btn borderPixel fatFont" id="startGame">Lancer le combat</button>`)

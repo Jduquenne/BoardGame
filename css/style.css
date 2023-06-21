@@ -35,12 +35,30 @@ body {
     color: red;
 }
 
+.h25 {
+    height: 25%;
+}
+
+.h150px {
+    height: 150px;
+}
+
+.h200px {
+    height: 200px;
+}
+
 .whiteFont {
     color: #dddddd;
 }
 
 .marginTop {
     margin-top: 35px;
+}
+
+.flex {
+    display: flex; 
+    align-items: center;
+    justify-content: center;
 }
 
 .groupBtnColumn {
@@ -61,7 +79,7 @@ body {
 }
 
 .btn {
-    padding: 0.75rem 1.5rem;
+    padding: 0.75rem 2.5rem;
     margin: 15px;
     border: none;
     border-radius: 5px;
@@ -118,15 +136,17 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-height: 100%;
-    width: 100%;
+    height: 100vh;
+    width: 100vw;
     padding: 0 60px;
     background-color: var(--primary);
 }
 
 .mainMenu .title {
-    position: fixed;
-    top: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
     color: #dddddd;
 }
 
@@ -137,9 +157,13 @@ body {
 }
 
 .mainMenu .menuSelectOptions {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+    height: calc(100vh - 150px);
+    width: 100%;
 }
 
 .menuSelect {
@@ -148,8 +172,49 @@ body {
     color: var(--primary);
 }
 
-.nb-spinner {
+.nb-spinner-0 {
+    height: 100%;
+    width: 100%;
     display: flex;
+    flex-direction: column;
+    align-items: center;
+    grid-area: 1 / 1 / 2 / 2;
+}
+
+.nb-spinner-1 {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    grid-area: 1 / 2 / 2 / 3;
+}
+
+.nb-spinner-2 {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    grid-area: 1 / 3 / 2 / 4;
+}
+
+.nb-spinner-3 {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    grid-area: 1 / 4 / 2 / 5;
+}
+
+.nb-spinner-4 {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    grid-area: 2 / 1 / 3 / 2;
 }
 
 .spinner {
