@@ -241,13 +241,15 @@ body {
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     border: 5px solid var(--secondary);
-    transform-style: preserve-3d;
     transition: 1.5s;
 }
 
 .isometric {
     transform: rotateX(45deg) rotateZ(45deg);
+    perspective: 500px;
+    perspective-origin: 100% 100%;
     margin-right: 10vw;
+    transition: all 1.5s;
 }
 
 #topView {
@@ -256,6 +258,7 @@ body {
 
 .lines {
     display: flex;
+    transform-style: preserve-3d;
     justify-content: center;
 }
 
@@ -280,25 +283,30 @@ body {
 }
 /* Top face */
 .obstacle {
-    background-size: cover;
-    position: relative;
-    border-radius: 2px;
-    /* -webkit-transform: translateZ(60px);
-    -webkit-transform-style: preserve-3d; */
+  width: 60px;
+  height: 60px;
+  position: relative;
+  transform-style: preserve-3d;
+  transform: translateZ(60px);
+  perspective-origin: 50% 50%;
 }
 /* Left face */
 .obstacle:after {
     background-image: inherit;
     background-size: cover;
-    /* -webkit-transform: rotateX(-90deg) translateY(60px);
-    -webkit-transform-origin: 100% 100%; */
+    transform: rotateX(-90deg) translateY(60px);
+    transform-origin: 100% 100%;
+    -webkit-transform: rotateX(-90deg) translateY(60px);
+    -webkit-transform-origin: 100% 100%;
 }
 /* Right face */
 .obstacle:before {
     background-image: inherit;
     background-size: cover;
-    /* -webkit-transform: rotateY(90deg) translateX(60px);
-    -webkit-transform-origin: 100% 0; */
+    transform: rotateY(90deg) translateX(60px);
+    transform-origin: 100% 0;
+    -webkit-transform: rotateY(90deg) translateX(60px);
+    -webkit-transform-origin: 100% 0;
 }
 
 .bonus {
