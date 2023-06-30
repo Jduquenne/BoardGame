@@ -45,14 +45,14 @@ class Fight {
             this.ui.interfacePlayer.setPlayerHealth(this.target)
             this.ui.interfaceBattle.setBannerPlayerDamage(this.attacker, this.target)
         }
-        setTimeout(() => this.checkVictory(), 1500)
+        setTimeout(() => this.checkVictory(), 500)
     }
 
     // L'attaquant passe en posture défensive
     playerDefense() {
         this.attacker.player.defense = true;
         this.ui.interfaceBattle.setBannerPlayerDefense(this.attacker, this.target)
-        setTimeout(() => this.checkVictory(), 1500)
+        setTimeout(() => this.checkVictory(), 500)
     }
 
     // Vérifie si la vie de la cible est inférieur à 0 et la passe à 0
@@ -66,7 +66,7 @@ class Fight {
     checkVictory() {
         if (this.target.player.health <= 0) {
             this.ui.interfaceBattle.setBannerPlayerWin(this.attacker)
-            setTimeout(() => this.newGame(), 1500)
+            setTimeout(() => this.newGame(), 500)
         } else {
             this.changeFighter();
             this.fight();
