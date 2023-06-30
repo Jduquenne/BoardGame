@@ -242,11 +242,12 @@ body {
     -webkit-box-sizing: border-box;
     border: 5px solid var(--secondary);
     transition: 1.5s;
+    transform-style: preserve-3d;
+    perspective-origin: 100% 100%;
 }
 
 .isometric {
     transform: rotateX(45deg) rotateZ(45deg);
-    perspective: 500px;
     perspective-origin: 100% 100%;
     margin-right: 10vw;
     transition: all 1.5s;
