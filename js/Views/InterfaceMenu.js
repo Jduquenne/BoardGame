@@ -34,6 +34,12 @@ class InterfaceMenu {
                 value : 3,
                 min: 1,
                 max: 5
+            },
+            {
+                name : "Nombre de pièges",
+                value : 3,
+                min: 1,
+                max: 5
             }
             
         ]
@@ -80,14 +86,16 @@ class InterfaceMenu {
     // Fonction qui permet de lancer une partie par défaut
     startDefaultGame() {
         $('.game').css('display', 'flex');
-        let board = new Board(10,10,10,3,3)
+        let board = new Board(10,10,10,3,3,3)
+        console.log(board)
         board.initGame()
     }
 
     // Fonction qui permet de lancer une partie customisé
     startCustomGame() {
         $('.game').css('display', 'flex');
-        let board = new Board(this.inputs[0].value,this.inputs[1].value, this.inputs[2].value, this.inputs[3].value, this.inputs[4].value)
+        let board = new Board(this.inputs[0].value,this.inputs[1].value, this.inputs[2].value, this.inputs[3].value, this.inputs[4].value, this.inputs[5].value)
+        console.log(this.inputs)
         board.initGame()
     }
 

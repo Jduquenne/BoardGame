@@ -217,6 +217,15 @@ body {
     grid-area: 2 / 1 / 3 / 2;
 }
 
+.nb-spinner-5 {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    grid-area: 2 / 2 / 2 / 2;
+}
+
 .spinner {
     display: inline-block;
     text-align: center;
@@ -569,4 +578,40 @@ body {
 .battleBanner .bannerDmg {
     color: red;
     font-size: 30px;
+}
+
+.trapModal {
+    position: fixed;
+    z-index: 99;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,.2);
+}
+
+.trapBanner {
+    position: fixed;
+    justify-content: center;
+    z-index: 1;
+    top: 45%;
+    left: 0;
+    height: 100px;
+    width: 100%;
+    background-image: linear-gradient( 178.2deg,  rgba(118,8,23,1) 10.9%, rgba(158,12,33,1) 62.6% );
+}
+
+.trapInfosText {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    color: #dddddd;
+    height: 100%;
+}
+
+.trapInfosText .currentPlayerImg {
+    margin: 0;
+    height: 80%;
 }

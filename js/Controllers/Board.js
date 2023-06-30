@@ -5,20 +5,24 @@ import { WeaponsRepository } from "../Repository/WeaponsRepository.js";
 import { PlayersRepository } from "../Repository/PlayersRepository.js";
 import { InterfaceUi } from "../Views/InterfaceUi.js";
 import { BonusRepository } from "../Repository/BonusRepository.js";
+import { TrapRepository } from "../Repository/TrapRepository.js";
 
 class Board {
 
-    constructor(maxLine, maxColumn, nbObstacles, nbWeapons) {
+    constructor(maxLine, maxColumn, nbObstacles, nbWeapons, nbBonus, nbTrap) {
         this.maxLine = maxLine;
-        this.maxColumn = maxColumn;
+        this.maxColumn = maxColumn
         this.nbObstacles = nbObstacles
         this.nbWeapons = nbWeapons
+        this.nbBonus = nbBonus
+        this.nbTrap = nbTrap
 
         this.cellsArray = [];
 
         this.playersInfos = []
         this.weaponsInfos = []
         this.bonusInfos = []
+        this.trapInfos = []
 
         this.activePlayer = 0;
 
@@ -29,7 +33,8 @@ class Board {
     initGame() {
         this.generateBoard()
         this.putObstacles(this.nbObstacles)
-        this.putBonus()
+        this.putBonus(this.nbBonus)
+        this.putTrap(this.nbTrap)
         this.putWeapons(this.nbWeapons)
         this.putPlayers(2)
 
@@ -71,35 +76,23 @@ class Board {
         });
     }
 
-
-    // // Récupére le nombre d'obstacles selon la taille du plateau
-    // getNbObstacles() {
-    //     const nbCells = this.maxLine * this.maxColumn
-    //     return Math.round(nbCells / 10)
-    // }
-
-    // Récupére le nombre d'obstacles selon la taille du plateau
-    // getNbWeapons() {
-    //     const nbCells = this.maxLine * this.maxColumn
-    //     const nbWeapons = Math.ceil((nbCells / 20))
-    //     if (nbWeapons >= 6) {
-    //         return 6
-    //     } else {
-    //         return Math.ceil((nbCells / 20))
-    //     }
-    // }
-
     /**
      *
      * @param {number} nbBonus
      */
     // Ajouter bonus sur cases vide aléatoires
-    putBonus() {
+    putBonus(nbBonus) {
         let bonus = BonusRepository.findAllBonus()
         this.shuffleArray(bonus);
-        for (let k = 0 ; k < bonus.length ; k++) {
+        for (let k = 0 ; k < nbBonus ; k++) {
             let [x,y] = this.randomCoordinates();
-            if (!this.cellsArray[x][y].isEmpty() || this.cellsArray[x][y].hasWeapon() || this.cellsArray[x][y].hasPlayer() || this.cellsArray[x][y].isSecurityZone()) {
+            if (!this.cellsArray[x][y].isEmpty() ||
+                this.cellsArray[x][y].hasWeapon() ||
+                this.cellsArray[x][y].hasPlayer() ||
+                this.cellsArray[x][y].hasBonus() || 
+                this.cellsArray[x][y].isSecurityZone() ||
+                this.cellsArray[x][y].hasTrap()) 
+            {
                 k--
             } else {
                 if (this.bonusInfos.length <= bonus.length) {
@@ -116,6 +109,32 @@ class Board {
                         this.cellsArray[x][y].setBonus(bonus[k]);
                     }
                 }
+            }
+        }
+    }
+
+    // Ajouter trap sur cases vide aléatoires
+    putTrap(nbTrap) {
+        let trap = TrapRepository.findAllTrap()
+        this.shuffleArray(trap);
+        for (let k = 0 ; k < nbTrap ; k++) {
+            let [x,y] = this.randomCoordinates();
+            if (!this.cellsArray[x][y].isEmpty() || 
+                this.cellsArray[x][y].hasWeapon() || 
+                this.cellsArray[x][y].hasPlayer() || 
+                this.cellsArray[x][y].hasTrap() || 
+                this.cellsArray[x][y].hasBonus() || 
+                this.cellsArray[x][y].isSecurityZone()
+            ) {
+                k--
+            } else {
+                this.cellsArray[x][y].setTrap(trap[k]);
+                this.trapInfos.push(
+                    {
+                        trap: trap[k],
+                        position: this.cellIdToCoord(this.cellsArray[x][y].id)
+                    }
+                )
             }
         }
     }
@@ -148,7 +167,7 @@ class Board {
         for (let k = 0 ; k < nbWeapon ; k++) {
             let [x,y] = this.randomCoordinates();
 
-            if (!this.cellsArray[x][y].isEmpty() || this.cellsArray[x][y].hasWeapon() || this.cellsArray[x][y].hasPlayer() || this.cellsArray[x][y].isSecurityZone()) {
+            if (!this.cellsArray[x][y].isEmpty() || this.cellsArray[x][y].hasWeapon() || this.cellsArray[x][y].hasPlayer() || this.cellsArray[x][y].isSecurityZone() || this.cellsArray[x][y].hasTrap()) {
                 k--
             } else {
                 this.cellsArray[x][y].setWeapon(weapons[k]);
@@ -211,6 +230,11 @@ class Board {
 
             cell.setPlayer(this.getActivePlayerInfos().player)
             this.getActivePlayerInfos().position = this.cellIdToCoord(cell.id);
+
+            if (cell.hasTrap()) {
+                this.interfaceUi.interfaceTrapRelease.setBannerPlayerTrapped(this.getActivePlayerInfos())
+                this.getActivePlayerInfos().player.health = this.getActivePlayerInfos().player.health - 20
+            }
 
             // Si le joueur peut se déplacer sur une arme alors il échange son arme avec celle de la cellule
             if (cell.hasWeapon()) {

@@ -13,60 +13,66 @@ class Cell {
      * @param  {function} onClick
      */
     constructor(id, decor, onClick) {
-        this.id = id;
-        this.decor = decor;
-        this.container = this.initContainer();
-        this.isMovable = false;
-        this.securityZone = false;
-        this.weapon = null;
-        this.bonus = null;
-        this.player = null;
-        this.onClick = onClick;
-        this.display();
+        this.id = id
+        this.decor = decor
+        this.container = this.initContainer()
+        this.isMovable = false
+        this.securityZone = false
+        this.weapon = null
+        this.bonus = null
+        this.player = null
+        this.trap = null
+        this.onClick = onClick
+        this.display()
     }
 
     initContainer() {
-        let container =  $(`<div class="cell" id="${this.id}"></div>`);
-        $(container).on('click', () => this.onClick(this));
+        let container =  $(`<div class="cell" id="${this.id}"></div>`)
+        $(container).on('click', () => this.onClick(this))
 
-        return container;
+        return container
     }
 
     display() {
         this.initContainer()
-        this.container.removeAttr("style");
-        this.container.removeClass('obstacle cellToMove weapon player');
+        this.container.removeAttr("style")
+        this.container.removeClass('obstacle cellToMove weapon player')
 
-        this.container.css('background-image', "url('" + AssetManager.getWhatInsideImg(this.decor) + "')");
+        this.container.css('background-image', "url('" + AssetManager.getWhatInsideImg(this.decor) + "')")
 
         if (this.decor === CELL_DECOR_OBSTACLE) {
-            this.container.addClass('obstacle');
+            this.container.addClass('obstacle')
         }
 
         if (this.isMovable) {
-            this.container.addClass('cellToMove');
+            this.container.addClass('cellToMove')
         }
 
         if (this.bonus) {
-            this.container.css('background-image', "url('" + AssetManager.getBonusImg(this.bonus) + "'), url('" + AssetManager.getWhatInsideImg(this.decor) + "')");
-            this.container.addClass('bonus');
+            this.container.css('background-image', "url('" + AssetManager.getBonusImg(this.bonus) + "'), url('" + AssetManager.getWhatInsideImg(this.decor) + "')")
+            this.container.addClass('bonus')
         }
 
         if (this.weapon) {
-            this.container.css('background-image', "url('" + AssetManager.getWeaponImg(this.weapon) + "'), url('" + AssetManager.getWhatInsideImg(this.decor) + "')");
-            this.container.addClass('weapon');
+            this.container.css('background-image', "url('" + AssetManager.getWeaponImg(this.weapon) + "'), url('" + AssetManager.getWhatInsideImg(this.decor) + "')")
+            this.container.addClass('weapon')
+        }
+
+        if (this.trap) {
+            this.container.css('background-image', "url('" + AssetManager.getWhatInsideImg(this.decor) + "')")
+            this.container.addClass('trap')
         }
 
         if (this.player) {
-            this.container.css('background-image', "url('" + AssetManager.getPlayerImg(this.player) + "'), url('" + AssetManager.getWhatInsideImg(this.decor) + "')");
-            this.container.addClass('player');
+            this.container.css('background-image', "url('" + AssetManager.getPlayerImg(this.player) + "'), url('" + AssetManager.getWhatInsideImg(this.decor) + "')")
+            this.container.addClass('player')
         }
     }
 
     // SET FUNCTIONS
 
     setDecor(decor) {
-        this.decor = decor;
+        this.decor = decor
         this.display()
     }
 
@@ -75,8 +81,17 @@ class Cell {
      * @param {{name: string, type: string, amount: number, image: string}} bonus
      */
     setBonus(bonus) {
-        this.bonus = bonus;
-        this.display();
+        this.bonus = bonus
+        this.display()
+    }
+
+    /**
+     *
+     * @param {{name: string, image: string}} trap
+     */
+    setTrap(trap) {
+        this.trap = trap
+        this.display()
     }
 
     /**
@@ -84,75 +99,79 @@ class Cell {
      * @param {{damage: number, image: string, name: string}} weapon
      */
     setWeapon(weapon) {
-        this.weapon = weapon;
-        this.display();
+        this.weapon = weapon
+        this.display()
     }
 
     /**
      * @param {{weapon: Weapon, image: string, name: string, health: number}} player
      */
     setPlayer(player) {
-        this.player = player;
-        this.display();
+        this.player = player
+        this.display()
     }
 
     setCellToGo() {
-        this.isMovable = true;
-        this.display();
+        this.isMovable = true
+        this.display()
     }
 
     setSecurityZone() {
-        this.securityZone = true;
-        this.display();
+        this.securityZone = true
+        this.display()
     }
 
     // CHECK FUNCTIONS
 
     isEmpty() {
-        return this.decor === CELL_DECOR_FLOOR;
+        return this.decor === CELL_DECOR_FLOOR
     }
 
     isSecurityZone() {
-        return this.securityZone === true;
+        return this.securityZone === true
     }
 
     hasBonus() {
-        return this.bonus !== null;
+        return this.bonus !== null
+    }
+
+    hasTrap() {
+        return this.trap !== null
     }
 
     hasWeapon() {
-        return this.weapon !== null;
+        return this.weapon !== null
     }
 
     hasPlayer() {
-        return this.player !== null;
+        return this.player !== null
     }
 
     // REMOVE FUNCTIONS
 
     removeBonus() {
-        this.bonus = null;
-        this.display();
+        this.bonus = null
+        this.display()
     }
 
     removeWeapon() {
-        this.weapon = null;
-        this.display();
+        this.weapon = null
+        this.display()
     }
 
     removePlayer() {
-        this.player = null;
-        this.display();
+        this.player = null
+        this.display()
     }
 
     removeCellToGo() {
-        this.isMovable = false;
-        this.display();
+        this.isMovable = false
+        this.display()
     }
 
     removeSecurityZone() {
-        this.securityZone = false;
-        this.display();
+        this.securityZone = false
+        this.display()
     }
 
 }

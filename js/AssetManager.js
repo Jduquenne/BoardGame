@@ -23,6 +23,11 @@ export class AssetManager
         return `./assets/dungeon/weapons/${weapon.image}`;
     }
 
+    // Récupére l'image d'arme d'une cellule
+    static getTrapImg(trap){
+        return `./assets/dungeon/trap/${trap.image}`;
+    }
+
     // Récupére l'image d'un joueur d'une cellule
     static getPlayerImg(player){
         return `./assets/dungeon/characters/${player.image}`;

@@ -1,5 +1,3 @@
-import { Bonus } from "../Models/Bonus.js";
-
 const data = [
     { name:'PM 2', type: 'move', image : "PM.png", amount: 2},
     { name:'PM 3', type: 'move', image : "PM.png", amount: 2},

@@ -2,6 +2,7 @@ import { InterfacePlayers } from "./InterfacePlayers.js";
 import { InterfaceWeapons } from "./InterfaceWeapons.js";
 import { InterfaceBattleInfos } from "./InterfaceBattleInfos.js";
 import { InterfaceMenu } from "./InterfaceMenu.js";
+import { InterfaceTrapRelease } from "./InterfaceTrapRelease.js";
 
 class InterfaceUi {
 
@@ -12,6 +13,7 @@ class InterfaceUi {
         this.interfacePlayer = new InterfacePlayers(this.playersInfos)
         this.interfaceWeapon = new InterfaceWeapons(this.weaponsInfos)
         this.interfaceBattle = new InterfaceBattleInfos(this.playersInfos)
+        this.interfaceTrapRelease = new InterfaceTrapRelease()
         this.interfaceMenu = new InterfaceMenu()
     }
 
