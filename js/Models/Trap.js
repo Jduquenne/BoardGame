@@ -8,7 +8,7 @@ class Trap {
     constructor(name, image){
         this.name = name
         this.image = image
-        this.isRelease = false
+        this.state = false
     }
 
 }

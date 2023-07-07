@@ -234,6 +234,8 @@ class Board {
             if (cell.hasTrap()) {
                 this.interfaceUi.interfaceTrapRelease.setBannerPlayerTrapped(this.getActivePlayerInfos())
                 this.getActivePlayerInfos().player.health = this.getActivePlayerInfos().player.health - 20
+                cell.trap.state = true
+
             }
 
             // Si le joueur peut se déplacer sur une arme alors il échange son arme avec celle de la cellule

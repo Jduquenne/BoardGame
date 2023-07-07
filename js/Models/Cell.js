@@ -59,10 +59,14 @@ class Cell {
         }
 
         if (this.trap) {
-            this.container.css('background-image', "url('" + AssetManager.getWhatInsideImg(this.decor) + "')")
-            this.container.addClass('trap')
+            if (this.trap.state) {
+                this.container.css('background-image', "url('" + AssetManager.getTrapImg(this.trap) + "'), url('" + AssetManager.getWhatInsideImg(this.decor) + "')")
+                this.container.addClass('trapped')
+            } else {
+                this.container.css('background-image', "url('" + AssetManager.getWhatInsideImg(this.decor) + "')")
+                this.container.addClass('trap')
+            }
         }
-
         if (this.player) {
             this.container.css('background-image', "url('" + AssetManager.getPlayerImg(this.player) + "'), url('" + AssetManager.getWhatInsideImg(this.decor) + "')")
             this.container.addClass('player')

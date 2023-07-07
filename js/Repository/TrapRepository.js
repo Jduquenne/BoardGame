@@ -1,9 +1,11 @@
+import { Trap } from "../Models/Trap.js";
+
 const data = [
-    { name:'trap1', image : "trap1.png"},
-    { name:'trap2', image : "trap1.png"},
-    { name:'trap3', image : "trap1.png"},
-    { name:'trap4', image : "trap1.png"},
-    { name:'trap5', image : "trap1.png"},
+    new Trap('trap1', 'trap1.png'),
+    new Trap('trap2', 'trap1.png'),
+    new Trap('trap3', 'trap1.png'),
+    new Trap('trap4', 'trap1.png'),
+    new Trap('trap5', 'trap1.png'),
 ]
 
 class TrapRepository {
