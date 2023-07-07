@@ -1,9 +1,11 @@
+import {Bonus} from '../Models/Bonus.js'
+
 const data = [
-    { name:'PM 2', type: 'move', image : "PM.png", amount: 2},
-    { name:'PM 3', type: 'move', image : "PM.png", amount: 2},
-    { name:'life medium', type: 'life', image : "life.png", amount: 50},
-    { name:'life low', type: 'life', image : "life.png", amount: 30},
-    { name:'life big', type: 'life', image : "life.png", amount: 100}
+    new Bonus('PM 2', 'move', 2, 'PM.png'),
+    new Bonus('PM 3', 'move', 2, 'PM.png'),
+    new Bonus('life medium', 'life', 50, 'life.png'),
+    new Bonus('life low', 'life', 30, 'life.png'),
+    new Bonus('life big', 'life', 100, 'life.png')
 ]
 
 class BonusRepository {
