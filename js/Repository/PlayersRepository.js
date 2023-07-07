@@ -2,21 +2,21 @@ import {Player} from "../Models/Player.js";
 
 // Base de donnée des joueurs disponible - Ajout de joueur simplifié
 const data = [
-    new Player({ name:'Björn', health: 100, image : "Björn.png", maxMove: 3}),
-    new Player({ name:'Bolvar', health: 150, image : "Bolvar.png", maxMove: 2}),
-    new Player({ name:'Brutus', health: 75, image : "Brutus.png", maxMove: 4}),
-    new Player({ name:'ElonMusk', health: 100, image : "ElonMusk.png", maxMove: 3}),
-    new Player({ name:'Gunnar', health: 75, image : "Gunnar.png", maxMove: 4}),
-    new Player({ name:'Indiana', health: 70, image : "Indiana.png", maxMove: 5}),
-    new Player({ name:'Jail', health: 100, image : "Jail.png", maxMove: 3}),
-    new Player({ name:'Kerhs', health: 100, image : "Kerhs.png", maxMove: 5}),
-    new Player({ name:'Khadgar', health: 100, image : "Khadgar.png", maxMove: 3}),
-    new Player({ name:'Lancelot', health: 100, image : "Lancelot.png", maxMove: 4}),
-    new Player({ name:'Prirodny', health: 100, image : "Prirodny.png", maxMove: 3}),
-    new Player({ name:'Thork', health: 100, image : "Thork.png", maxMove: 2}),
-    new Player({ name:'Vanessa VanCleef', health: 100  , image : "Van_cleef.png", maxMove: 3}),
-    new Player({ name:'Xena', health: 300, image : "Xena.png", maxMove: 1}),
-    new Player({ name:'Yggdrassil', health: 100, image : "Yggdrassil.png", maxMove: 3}),
+    new Player('Björn', 100, "Björn.png", 3),
+    new Player('Bolvar', 150, "Bolvar.png", 2),
+    new Player('Brutus', 75, "Brutus.png", 4),
+    new Player('ElonMusk', 100, "ElonMusk.png", 3),
+    new Player('Gunnar', 75, "Gunnar.png", 4),
+    new Player('Indiana', 70, "Indiana.png", 5),
+    new Player('Jail', 100, "Jail.png", 3),
+    new Player('Kerhs', 100, "Kerhs.png", 5),
+    new Player('Khadgar', 100, "Khadgar.png", 3),
+    new Player('Lancelot', 100, "Lancelot.png", 4),
+    new Player('Prirodny', 100, "Prirodny.png", 3),
+    new Player('Thork', 100, "Thork.png", 2),
+    new Player('Vanessa VanCleef', 100  ,"Van_cleef.png", 3),
+    new Player('Xena', 300, "Xena.png", 1),
+    new Player('Yggdrassil', 100, "Yggdrassil.png", 3),
 ]
 class PlayersRepository {
 
