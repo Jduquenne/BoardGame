@@ -87,7 +87,6 @@ class InterfaceMenu {
     startDefaultGame() {
         $('.game').css('display', 'flex');
         let board = new Board(10,10,10,3,3,3)
-        console.log(board)
         board.initGame()
     }
 
@@ -95,7 +94,6 @@ class InterfaceMenu {
     startCustomGame() {
         $('.game').css('display', 'flex');
         let board = new Board(this.inputs[0].value,this.inputs[1].value, this.inputs[2].value, this.inputs[3].value, this.inputs[4].value, this.inputs[5].value)
-        console.log(this.inputs)
         board.initGame()
     }
 
