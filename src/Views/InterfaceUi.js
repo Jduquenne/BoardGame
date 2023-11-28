@@ -17,7 +17,6 @@ class InterfaceUi {
         this.interfaceMenu = new InterfaceMenu()
     }
 
-
     displayUI () {
         this.interfaceMenu.removeInterfaceMenu()
         this.interfacePlayer.displayPlayers()
