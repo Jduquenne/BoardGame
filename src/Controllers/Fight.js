@@ -88,7 +88,7 @@ class Fight {
         );
 
         $("#exit").on("click", function () {
-                window.close()
+                this.ui.displayMainMenu()
             }.bind(this)
         );
     }
